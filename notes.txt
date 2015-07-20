@@ -1,0 +1,32 @@
+BT
+1. Ordered BT to circular doubly LL
+   a. BT to doubly linked list
+2. Count leaf nodes
+3. Level order spiral form
+4. Child nodes sum
+5. convert BT to child sum
+6. Diameter of BT
+7. Longest chain
+8. LCA in BT
+9. Perimeter of BT
+10. Bottom view
+11. Top view
+12. left view, right view
+13. max path sum
+14. nearest leaf nodes
+15. special BT from in order
+16. BT from inorder + preorder
+17. BT from inorder + levelorder
+18. Odd level sum - even level sum
+19. check if a BT is a subtree of another tree
+20. Print all nodes at distance K
+
+BST
+1. sorted array to BST
+2. Kth smallest element
+3. Kth largest element
+4. check if a BT is a BST
+5. sorted linked list to BST
+6. Inorder successor in a BST
+7. BST to sorted doubly linked list
+8. BST lca 

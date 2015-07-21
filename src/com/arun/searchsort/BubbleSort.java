@@ -1,4 +1,4 @@
-package com.arun.practise.searchsort;
+package com.arun.searchsort;
 
 public class BubbleSort {
 	

@@ -1,4 +1,4 @@
-package com.arun.practise.searchsort;
+package com.arun.searchsort;
 
 import java.util.ArrayList;
 import java.util.Collections;

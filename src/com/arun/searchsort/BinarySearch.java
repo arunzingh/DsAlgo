@@ -1,4 +1,4 @@
-package com.arun.practise.searchsort;
+package com.arun.searchsort;
 
 public class BinarySearch {
 	int doBinarySearch(int[] a, int left, int right, int num) {

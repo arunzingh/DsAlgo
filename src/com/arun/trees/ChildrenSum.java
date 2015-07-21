@@ -80,7 +80,7 @@ public class ChildrenSum {
 		
 		cs.convert(root1);
 		
-		new Inorder().traverse(root1);
+		new InOrder().traverseRecursive(root1);
 		
 	}
 }

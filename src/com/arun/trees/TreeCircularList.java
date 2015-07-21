@@ -7,13 +7,13 @@ public class TreeCircularList {
 	TreeNode convertToList(TreeNode root) {
 		
 		if (root == null) return null;
-//		System.out.println("root = " + root.data);
+		
 		TreeNode leftList = convertToList(root.left);
 		TreeNode rightList = convertToList(root.right);
 		
+		System.out.println("root= " + root.data + " llist= " + leftList + " rlist= " + rightList);
 		root.left = root;
 		root.right = root;
-		System.out.println("root = " + root.data );
 		leftList = append(leftList, root);
 		leftList = append(leftList, rightList);
 		
@@ -22,21 +22,21 @@ public class TreeCircularList {
 	
 	TreeNode append(TreeNode a, TreeNode b) {
 		 if (a != null) {
-			 System.out.println("a = " + a.data);
+//			 System.out.println("a = " + a.data);
 		 } else {
-			 System.out.println("a is null");
+//			 System.out.println("a is null");
 		 }
 		 
 		 if (b != null) {
-			 System.out.println("b = " + b.data);
+//			 System.out.println("b = " + b.data);
 		 } else {
-			 System.out.println("b is null");
+//			 System.out.println("b is null");
 		 }
 
 		if (a == null) return b;
 		if (b == null) return a;
 		
-		System.out.println("appending " + a.data + " with " + b.data);
+//		System.out.println("appending " + a.data + " with " + b.data);
 		
 		TreeNode aLast = a.left;
 		TreeNode bLast = b.left;
@@ -48,7 +48,7 @@ public class TreeCircularList {
 	}
 	
 	void join(TreeNode a, TreeNode b){
-		System.out.println("joining " + a.data + " with " + b.data);
+//		System.out.println("joining " + a.data + " with " + b.data);
 		a.right = b;
 		b.left = a;
 	}
@@ -73,10 +73,10 @@ public class TreeCircularList {
 		
 		TreeCircularList list = new TreeCircularList();
 		
-//		TreeNode result = list.convertToList(root);
-//		printList(result);
+		TreeNode result = list.convertToList(root);
+		printList(result);
 		
-		System.out.println(list.getLeafNodesCount(root));
+//		System.out.println(list.getLeafNodesCount(root));
 	}
 	
 	public static void printList(TreeNode head) {

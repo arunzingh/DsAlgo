@@ -70,14 +70,14 @@ public class BuildTree {
 		BuildTree tree = new BuildTree();
 		TreeNode result = tree.buildTreeFromInorder(inorder, 0, inorder.length - 1);
 		
-		new Inorder().traverse(result);
+		new InOrder().traverseRecursive(result);
 		
 		int in[] = {4, 2, 5, 1, 6, 3};
 		int pre[] = {1, 2, 4, 5, 3, 6};
 		
 		TreeNode result1 = tree.buildTreeFromInorderPreOrder(in, pre);
 		
-		new Inorder().traverse(result1);
+		new InOrder().traverseRecursive(result1);
 
 	}
 }

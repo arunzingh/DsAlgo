@@ -2,30 +2,25 @@ package com.arun.trees;
 
 import java.util.Stack;
 
-public class InOrder {
+public class PreOrder {
+	
 	void traverseRecursive(TreeNode root) {
 		if (root == null) return;
 		
-		traverseRecursive(root.left);
 		System.out.print(root.data + " ");
+		traverseRecursive(root.left);
 		traverseRecursive(root.right);
 	}
 	
 	void traverseIterative(TreeNode root) {
 		Stack<TreeNode> s = new Stack<TreeNode>();
-		if (root == null) return;
-		
-		TreeNode curr = root;
-		while (!s.isEmpty() || curr != null) {
-			
-			if (curr != null) {
-				s.push(curr);
-				curr = curr.left;
-			} else {
-				TreeNode n = s.pop();
-				System.out.print(n.data + " ");
-				curr = n.right;
-			}
+
+		s.push(root);
+		while (!s.isEmpty()) {
+			TreeNode n = s.pop();
+			System.out.print(n.data + " ");
+			if (n.right != null) s.push(n.right);
+			if (n.left != null) s.push(n.left);
 		}
 	}
 	
@@ -38,9 +33,13 @@ public class InOrder {
 		root.right = new TreeNode(2);
 		root.right.left = new TreeNode(2);
 		
-		InOrder in = new InOrder();
-		in.traverseRecursive(root);
-		System.out.println();
-		in.traverseIterative(root);
+		PreOrder pre = new PreOrder();
+		
+		System.out.println("Recursive");
+		pre.traverseRecursive(root);
+		System.out.println("");
+		System.out.println("Iterative");
+		pre.traverseIterative(root);
 	}
+	
 }

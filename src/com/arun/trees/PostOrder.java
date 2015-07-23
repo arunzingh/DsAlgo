@@ -20,15 +20,13 @@ public class PostOrder {
 		Stack<TreeNode> s = new Stack<TreeNode>();
 		
 		while (true) {
-			
 			if (curr != null) {
 				if (curr.right != null)  s.push(curr.right);
 				s.push(curr);
 				curr = curr.left;
 				continue;
-				
 			}
-			
+
 			if(s.isEmpty()) break;
 			
 			curr = s.pop();
@@ -55,6 +53,10 @@ public class PostOrder {
 			s2.push(n1);
 			if (n1.left != null) s1.push(n1.left);
 			if (n1.right != null) s1.push(n1.right);
+			
+			System.out.print("s1 = " + s1);
+			System.out.print(" s2 = " + s2);
+			System.out.println("");
 		}
 		
 		while (!s2.isEmpty()) {
@@ -76,6 +78,6 @@ public class PostOrder {
 		
 		PostOrder po = new PostOrder();
 //		po.traverseRecursive(root);
-		po.traverseIterative2(root);
+		po.traverseIterative1(root);
 	}
 }

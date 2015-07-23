@@ -1,9 +1,77 @@
 package com.arun.trees;
 
+import com.arun.linkedlist.Node;
+import com.arun.linkedlist.Utils;
+
+/**
+ * BST Tree Builder from 
+ * 
+ * 	1 - Inorder
+ *  2 - Inorder + preorder
+ *  3 - sorted array
+ *  4 - sorted linked list
+ * @author Arun
+ *
+ */
 public class BuildTree {
+	static Node curr;
+	
+	TreeNode fromSortedLL(Node head) {
+		int length = Utils.getLength(head);
+		curr = head;
+		return fromSortedLLUtil(0, length - 1);
+	}
+	
+	TreeNode fromSortedLLUtil(int left, int right) {
+		if (left > right) return null;
+		
+		int mid = left + (right - left) / 2;
+		System.out.println("mid = " + mid);
+		TreeNode lNode = fromSortedLLUtil(left, mid - 1);  
+		System.out.println("parent = " + curr.data);
+		TreeNode parent = new TreeNode(curr.data);
+		curr = curr.next;
+		TreeNode rNode = fromSortedLLUtil(mid + 1, right);
+		
+		parent.left = lNode;
+		parent.right = rNode;
+		if (lNode != null) System.out.println("left = " + lNode.data);
+		else System.out.println("left is null");
+		
+		if (rNode != null) System.out.println("right = " + rNode.data);
+		else System.out.println("right is null");
+		return parent;
+		
+	}
 	
 	
-	TreeNode buildTreeFromInorderPreOrder(int[] in, int[] pre) {
+	TreeNode fromSortedArray(int[] arr) {
+		return fromSortedArrUtil(arr, 0, arr.length - 1);
+	}
+	
+	TreeNode fromSortedArrUtil(int[] arr, int left, int right) {
+		if (left > right) return null;
+		 
+		int mid = left + (right - left) / 2;
+//		System.out.println("l= " + left + " r= " + right + " mid= " + mid);	
+		TreeNode n = new TreeNode(arr[mid]);
+//		System.out.println("node= " + n.data);
+		n.left = fromSortedArrUtil(arr, left, mid - 1);
+//		if (n.left != null) 
+//			System.out.println("left = " + n.left.data);
+//		else 
+//			System.out.println("null to left");
+		n.right = fromSortedArrUtil(arr, mid + 1, right);
+//		if (n.left != null) 
+//			System.out.println("right = " + n.right.data);
+//		else 
+//			System.out.println("null to right");
+		return n;
+		
+	}
+	
+	
+	TreeNode fromInorderPreOrder(int[] in, int[] pre) {
 
 		int[] preIndex = {0};
 		
@@ -34,7 +102,7 @@ public class BuildTree {
 		return -1;
 	}
 	
-	TreeNode buildTreeFromInorder(int[] in, int left, int right) {
+	TreeNode fromInorder(int[] in, int left, int right) {
 		if (left > right) return null;
 		
 		int index = searchMax(in, left, right);
@@ -45,8 +113,8 @@ public class BuildTree {
 			return node;
 		}
 
-		node.left = buildTreeFromInorder(in, left, index - 1);
-		node.right = buildTreeFromInorder(in, index + 1, right); 
+		node.left = fromInorder(in, left, index - 1);
+		node.right = fromInorder(in, index + 1, right); 
 		
 		return node;
 	}
@@ -68,16 +136,33 @@ public class BuildTree {
 		int[] inorder = {5, 10, 40, 30, 28};
 		
 		BuildTree tree = new BuildTree();
-		TreeNode result = tree.buildTreeFromInorder(inorder, 0, inorder.length - 1);
-		
-		new InOrder().traverseRecursive(result);
+		TreeNode result = tree.fromInorder(inorder, 0, inorder.length - 1);
+//		new InOrder().traverseRecursive(result);
 		
 		int in[] = {4, 2, 5, 1, 6, 3};
 		int pre[] = {1, 2, 4, 5, 3, 6};
 		
-		TreeNode result1 = tree.buildTreeFromInorderPreOrder(in, pre);
+		TreeNode result1 = tree.fromInorderPreOrder(in, pre);
+//		new InOrder().traverseRecursive(result1);
 		
-		new InOrder().traverseRecursive(result1);
-
+		int[] arr = {1, 2, 3, 4, 5, 6};
+		
+//		TreeNode result2 = tree.fromSortedArray(arr);
+//		new PreOrder().traverseRecursive(result2);
+		
+		Node head = new Node(1);
+		Node n1 = new Node(2);
+		Node n2 = new Node(3);
+		Node n3 = new Node(4);
+		Node n4 = new Node(5);
+		Node n5 = new Node(6);
+		head.next = n1;
+		n1.next = n2;
+		n2.next = n3;
+		n3.next = n4;
+		n4.next = n5;
+		
+		TreeNode r3 = tree.fromSortedLL(head);
+		new PreOrder().traverseRecursive(r3);
 	}
 }

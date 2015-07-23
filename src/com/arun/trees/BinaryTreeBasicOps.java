@@ -70,15 +70,16 @@ public class BinaryTreeBasicOps {
 		
 		path[length++] = root.data;
 		
-		if (root.left != null || root.right != null) {
-			printPathsRecur(root.left, path, length);
-			printPathsRecur(root.right, path, length);
-		} else {
+		if (root.left == null && root.right == null) {
 			for (int i = 0; i < length; i++) {
 				System.out.print(path[i] + " ");
 			}
 			System.out.println("");
-		}
+			return;
+		} 
+
+		printPathsRecur(root.left, path, length);
+		printPathsRecur(root.right, path, length);
 	}
 
 	public static void main(String[] args) {
@@ -107,10 +108,10 @@ public class BinaryTreeBasicOps {
 		
 		System.out.println("max depth = " + ops.getMaxDepth(root1));
 		
-		ops.changeToMirrorTree(root);
+//		ops.changeToMirrorTree(root);
 		
 		ops.travereInorder(root);
-		System.out.println("");
+		System.out.println("Paths to leaf");
 		ops.printPathsToLeaf(root);
 	}
 }

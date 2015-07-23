@@ -43,7 +43,7 @@ public class TreeCircularList {
 		
 		join(aLast, b);
 		join(bLast, a);
-		
+		 
 		return a;
 	}
 	

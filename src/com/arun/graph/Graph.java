@@ -7,23 +7,39 @@ public class Graph {
 	int countVertex;
 	int[][] adjMatrix;
 	Vertex[] listVertex;
+	boolean mIsDirected;
 	
-	public Graph(int count) {
+	public Graph(int count, boolean isDirected) {
 		countVertex = count;
 		adjMatrix = new int[countVertex][countVertex];
 		listVertex = new Vertex[countVertex]; 
-		
-		for (int i = 0; i < count; i++) {
+		mIsDirected = isDirected;
+		for (int i = 0; i < countVertex; i++) {
 			listVertex[i] = new Vertex(i, LABELS[i]);
+		}
+	}
+	
+	void reset() {
+		for (int i = 0; i < countVertex; i++) {
+			listVertex[i].visited = false;
+		}
+	}
+	
+	public void addEdge(int i, int j, int w){
+		if (i >=0 && i < countVertex && j >= 0 && j < countVertex) {
+			adjMatrix[i][j] = w;
+			if (!mIsDirected) adjMatrix[j][i] = w;
 		}
 	}
 	
 	public void addEdge(int i, int j){
 		if (i >=0 && i < countVertex && j >= 0 && j < countVertex) {
 			adjMatrix[i][j] = 1;
-			adjMatrix[j][i] = 1;
+			if (!mIsDirected) adjMatrix[j][i] = 1;
 		}
 	}
+	
+	
 	
 	void printAdjMatrix() {
 		for (int i = 0; i < countVertex; i++) {
@@ -36,7 +52,7 @@ public class Graph {
 	
 	public boolean isConnected(int i, int j) {
 		if (i >=0 && i < countVertex && j >= 0 && j < countVertex) {
-			return adjMatrix[i][j] == 1;
+			return adjMatrix[i][j] != 0 ;
 		}
 		return false;
 	}

@@ -30,3 +30,51 @@ BST
 6. Inorder successor in a BST
 7. BST to sorted doubly linked list
 8. BST lca 
+
+
+Graph
+------
+
+1. BFS
+2. DFS
+3. Detect cycle 
+    a. using dfs
+	b. using union find
+4. Topological sorting
+5. Bipartite graph checking*
+
+SP
+----
+6. Dijkstra
+7. BellmanFord
+8. Floyd Warshall
+9. Johnson*
+10. DAG*
+
+MST
+----
+11. Prims
+12. Kruskal
+
+Max Flow
+---------
+13. Ford Fulkerson
+14. Max Bipartite matching*
+
+15. Travelling Salesman 
+16. Hamiltonian cycle
+17. Graph Coloring
+
+18. Strongly connected graph
+	a. Directed graph
+	b. Undirected graph
+19. Strongly connected components
+	a. Directed graph
+	b. Undirected graph
+20. Eulerian path & circuit 
+	a. Directed graph
+	b. Undirected graph
+
+
+
+

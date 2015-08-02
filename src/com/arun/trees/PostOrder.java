@@ -25,7 +25,7 @@ public class PostOrder {
 				s.push(curr);
 				curr = curr.left;
 				continue;
-			}
+			}    
 
 			if(s.isEmpty()) break;
 			

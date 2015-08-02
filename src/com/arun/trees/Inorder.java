@@ -3,6 +3,32 @@ package com.arun.trees;
 import java.util.Stack;
 
 public class InOrder {
+	
+	void doMorrisTraversal(TreeNode root) {
+		TreeNode curr = root;
+		
+		while (curr != null) {
+			if (curr.left == null) {
+				System.out.print(curr.data + " ");
+				curr = curr.right;
+			} else {
+				// find inorder successor
+				TreeNode pre = curr.left;
+				while (pre.right != null && pre.right != curr) {
+					pre = pre.right;
+				}
+				if (pre.right == null) {
+					pre.right = curr;
+					curr = curr.left;
+				} else {
+					pre.right = null;
+					System.out.print(curr.data + " ");
+					curr = curr.right;
+				}
+			}
+		}
+	}
+	
 	void traverseRecursive(TreeNode root) {
 		if (root == null) return;
 		
@@ -41,6 +67,8 @@ public class InOrder {
 		InOrder in = new InOrder();
 		in.traverseRecursive(root);
 		System.out.println();
-		in.traverseIterative(root);
+//		in.traverseIterative(root);
+		
+		in.doMorrisTraversal(root);
 	}
 }

@@ -20,23 +20,22 @@ public class Traversal {
 		return false;
 	}
 	
-	private boolean isCyclicUtil(Graph g, Vertex v, boolean[] recStack) {
+	private boolean isCyclicUtil(Graph g, Vertex u, boolean[] recStack) {
 		
-		if (!v.visited) {
-			v.visited = true;
-			recStack[v.index] = true;
-			for (int j = 0; j < g.countVertex; j++) {
-				int index = v.index;
-				if (g.adjMatrix[index][j] == 1) {
-					if (!g.listVertex[j].visited && isCyclicUtil(g, g.listVertex[j], recStack)) {
+		if (!u.visited) {
+			u.visited = true;
+			recStack[u.index] = true;
+			for (int v = 0; v < g.countVertex; v++) {
+				if (g.adjMatrix[u.index][v] == 1) {
+					if (!g.listVertex[v].visited && isCyclicUtil(g, g.listVertex[v], recStack)) {
 						return true;
-					} else if (recStack[j]) {
+					} else if (recStack[v]) {
 						return true;
 					}
 				}
 			}
 		}
-		recStack[v.index] = false;
+		recStack[u.index] = false;
 		return false;
 	}
 

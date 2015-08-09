@@ -1,5 +1,8 @@
 package com.arun.graph;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Graph {
 	
 	private final String[] LABELS = { "A", "B", "C", "D", "E", "F", "G", 
@@ -9,13 +12,17 @@ public class Graph {
 	Vertex[] listVertex;
 	boolean mIsDirected;
 	
+	List[] adjList;
+	
 	public Graph(int count, boolean isDirected) {
 		countVertex = count;
 		adjMatrix = new int[countVertex][countVertex];
+		adjList = new LinkedList[countVertex];
 		listVertex = new Vertex[countVertex]; 
 		mIsDirected = isDirected;
 		for (int i = 0; i < countVertex; i++) {
 			listVertex[i] = new Vertex(i, LABELS[i]);
+			adjList[i] = new LinkedList<Vertex>();
 		}
 	}
 	
@@ -36,6 +43,7 @@ public class Graph {
 		if (i >=0 && i < countVertex && j >= 0 && j < countVertex) {
 			adjMatrix[i][j] = 1;
 			if (!mIsDirected) adjMatrix[j][i] = 1;
+			adjList[i].add(listVertex[j]);
 		}
 	}
 	
@@ -67,6 +75,19 @@ public class Graph {
 		return null;
 	}
 	
+	Graph getTranspose() {
+		Graph gt = new Graph(this.countVertex, this.mIsDirected);
+		for (int u = 0; u < countVertex; u++) {
+			for (int v = 0; v < countVertex; v++) {
+				if (this.adjMatrix[u][v] != 0) {
+					gt.adjMatrix[v][u] = this.adjMatrix[u][v];
+				}
+			}
+		}
+		
+		return gt;
+	}
+	
 }
 
 class Vertex {
@@ -77,5 +98,10 @@ class Vertex {
 	public Vertex(int index, String label) {
 		this.index = index;
 		this.label = label;
+	}
+	
+	@Override
+	public String toString() {
+		return index + " -> " + visited;
 	}
 }

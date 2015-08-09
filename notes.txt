@@ -41,10 +41,11 @@ Graph
     a. using dfs
 	b. using union find
 4. Topological sorting
-5. Bipartite graph checking*
+5. Bipartite graph checking
 
 SP
-----
+---- 
+
 6. Dijkstra
 7. BellmanFord
 8. Floyd Warshall
@@ -58,12 +59,8 @@ MST
 
 Max Flow
 ---------
-13. Ford Fulkerson
-14. Max Bipartite matching*
-
-15. Travelling Salesman 
-16. Hamiltonian cycle
-17. Graph Coloring
+13. Ford Fulkerson 
+14. Max Bipartite matching
 
 18. Strongly connected graph
 	a. Directed graph
@@ -74,6 +71,12 @@ Max Flow
 20. Eulerian path & circuit 
 	a. Directed graph
 	b. Undirected graph
+
+15. Travelling Salesman 
+16. Hamiltonian cycle
+17. Graph Coloring
+
+
 
 
 

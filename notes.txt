@@ -32,35 +32,41 @@ BST
 8. BST lca 
 
 
-Graph
+​Graph
 ------
-
-1. BFS
+1. BFS​​
 2. DFS
 3. Detect cycle 
-    a. using dfs
-	b. using union find
+    a. Directed graph - using dfs
+	b. Undirected graph - using union find
+	c. Undirected graph - using dfs
 4. Topological sorting
-5. Bipartite graph checking
 
 SP
----- 
-
-6. Dijkstra
-7. BellmanFord
-8. Floyd Warshall
-9. Johnson*
-10. DAG*
+----
+5. Dijkstra
+6. BellmanFord
+7. Floyd Warshall
+8. Johnson
+9. DAG
 
 MST
 ----
-11. Prims
-12. Kruskal
+10. Prims
+11. Kruskal
 
 Max Flow
 ---------
-13. Ford Fulkerson 
-14. Max Bipartite matching
+12. Ford Fulkerson
+13. Max Bipartite matching
+
+Graph Coloring
+---------------
+14. Check given graph bipartite or not
+15. Upper bound in colors required for a graph
+16. m Coloring problem
+
+17. Hamiltonian cycle
 
 18. Strongly connected graph
 	a. Directed graph
@@ -71,10 +77,22 @@ Max Flow
 20. Eulerian path & circuit 
 	a. Directed graph
 	b. Undirected graph
+21. Articulation points
 
-15. Travelling Salesman 
-16. Hamiltonian cycle
-17. Graph Coloring
+
+Arrays
+------
+
+1. Largest Sum Contiguous Subarray
+2. Search an element in a sorted pivoted array
+3. Rotate an array
+4. Maximum sum such that no two elements are adjacent
+5. Maximum difference between two elements in an array
+6. Maximum and minimum of an array using minimum number of comparisons
+7. Union and Intersection of two sorted arrays and unsorted arrays
+8. Dutch National flag
+9. Find the Minimum length Unsorted Subarray, sorting which makes the complete array sorted
+10. Turn an image by 90 degree
 
 
 

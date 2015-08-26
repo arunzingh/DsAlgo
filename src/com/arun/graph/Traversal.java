@@ -1,13 +1,10 @@
 package com.arun.graph;
 
-
-
 public class Traversal {
 	private final MyStack<Vertex> s = new MyStack<Vertex>();
 	private final MyQueue<Vertex> q = new MyQueue<Vertex>();
 	
 	Graph graph;
-	
 	
 	boolean isCyclic(Graph g) {
 		boolean[] recStack = new boolean[g.countVertex];
@@ -141,7 +138,7 @@ public class Traversal {
 		Traversal t = new Traversal();
 //		t.dfs(graph, graph.listVertex[0]);
 		graph.reset();
-		System.out.println(""); 
+//		System.out.println(""); 
 //		t.dfsRecursive(graph, graph.listVertex[0]);
 		
 //		t.bfs(graph, graph.listVertex[0]);
@@ -163,7 +160,22 @@ public class Traversal {
 		graph2.addEdge(1, 2);
 		graph2.addEdge(2, 3);
 		graph2.addEdge(3, 3);
-		graph1.printAdjMatrix();
-		System.out.println(t.isCyclic(graph2));
+//		graph1.printAdjMatrix();
+//		System.out.println(t.isCyclic(graph2));
+		
+		Graph g3 = new Graph(5, false);
+		g3.addEdge(1, 0);
+		g3.addEdge(0, 2);
+		g3.addEdge(2, 0);
+		g3.addEdge(0, 3);
+		g3.addEdge(3, 4);
+		
+		System.out.println("isCyclic = " + t.isCyclic(g3));
+		
+		Graph g4 = new Graph(3, false);
+	    g4.addEdge(0, 1);
+	    g4.addEdge(1, 2);
+		System.out.println("isCyclic = " + t.isCyclic(g4));
+
 	}
 }

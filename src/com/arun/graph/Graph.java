@@ -87,6 +87,14 @@ public class Graph {
 		
 		return gt;
 	}
+
+	public void initEdgesMax() {
+		for (int u = 0; u < countVertex; u++) {
+			for (int v = 0; v < countVertex; v++) {
+				adjMatrix[u][v] = 9999;
+			}
+		}
+	}
 	
 }
 

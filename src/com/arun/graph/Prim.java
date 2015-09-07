@@ -3,8 +3,10 @@ package com.arun.graph;
 public class Prim {
 	 
 	void findMinSpanningTree(Graph g) {
- 
+		
+		// key values to all vertices
 		int[] key = new int[g.countVertex];
+		
 		boolean[] minSpanningTreeSet = new boolean[g.countVertex];
 		int[] parent = new int[g.countVertex];
  
@@ -28,8 +30,8 @@ public class Prim {
 				if (g.adjMatrix[u.index][v] != 0 
 						&& !minSpanningTreeSet[v]
 						&& key[v] > g.adjMatrix[u.index][v]) {
-					parent[v] = u.index;
 					key[v] = g.adjMatrix[u.index][v];
+					parent[v] = u.index;
 				}
 			}
  

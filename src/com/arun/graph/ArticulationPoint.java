@@ -32,7 +32,7 @@ public class ArticulationPoint {
 		d++;
 		
 		for (Vertex v : g.listVertex) {
-			if (g.adjMatrix[u.index][v.index] != 0) {
+			if (g.adjMatrix[u.index][v.index] != 0) { 
 				if (!v.visited) {
 					children++;
 					parent[v.index] = u.index;

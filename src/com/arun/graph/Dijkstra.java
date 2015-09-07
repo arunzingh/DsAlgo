@@ -34,8 +34,9 @@ public class Dijkstra {
 		// Init the distance to source vertex as 0
 		dist[source.index] = 0;
 		
-		
-		for (int i = 0; i < g.countVertex; i++) {
+		// Find shortest path to all vertices
+		for (int count = 0; count < g.countVertex - 1; count++) {
+			
 			Vertex u = extractMinDistanceVertex(g, dist, shortestPathSet);
 			
 			shortestPathSet[u.index] = true;

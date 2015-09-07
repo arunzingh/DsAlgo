@@ -23,7 +23,7 @@ public class FloydWarshall {
 		g.addEdge(1, 2, 3);
 		g.addEdge(2, 3, 1);
 		g.addEdge(0, 3, 10);
-		g.printAdjMatrix();
+//		g.printAdjMatrix();
  
 		FloydWarshall fw = new FloydWarshall();
  

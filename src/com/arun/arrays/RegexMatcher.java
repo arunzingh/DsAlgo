@@ -11,10 +11,10 @@ public class RegexMatcher {
 			return isMatchHere(r.substring(1), s);}
 		
 		
-		for (int i = 0; i < s.length(); i++) {
-			if(isMatchHere(r, s.substring(i)))
+//		for (int i = 0; i < s.length(); i++) {
+			if(isMatchHere(r, s.substring(0)))
 				return true;
-		}
+//		}
 		
 		return false;
 	}

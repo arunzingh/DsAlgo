@@ -30,12 +30,15 @@ public class Eulerian {
 		}
 		
 		if (oddVertices > 2) {
+			// Not Eulerian
 			return 0;
 		}
 		
 		if (oddVertices == 0) 
+			// Eulerian
 			return 2;
 		else 
+			// Semi-Eulerian 
 			return 1;
 		
 	}

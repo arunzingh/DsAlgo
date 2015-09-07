@@ -13,7 +13,7 @@ public class BellmanFord {
 		
 		dist[source.index] = 0;
 		
-		for (int i = 0; i < g.listVertex.length - 1; i++) {
+		for (int count = 0; count < g.listVertex.length; count++) {
 			for (Vertex u : g.listVertex) {
 				for (int v = 0; v < g.countVertex; v++) {
 					if (g.adjMatrix[u.index][v] != 0 && dist[v] > dist[u.index] + g.adjMatrix[u.index][v]) 
@@ -22,6 +22,8 @@ public class BellmanFord {
 			}
 		}
 		
+		
+		// To detect negative weight cycle
 		for (int i = 0; i < g.countVertex; i++) {
 			for (int j = 0; j < g.countVertex; j++) {
 				if (g.isConnected(i, j) && dist[j] > dist[i] + g.adjMatrix[i][j])

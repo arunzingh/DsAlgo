@@ -1,0 +1,812 @@
+Arrays
+------
+1. Given an array A[] and a number x, check for pair in A[] with sum as x
+  - Sort the array
+  - Maintain two index pointers, say start & end
+  - Initialize start index to left most index, 0 and end index to right most index, N-1
+  - Loop while start < end
+  - Sum the array elements in the start and end pointers
+  - If the sum is less than x, increment start pointer
+  - If the sum is grater than x, decrement end pointer
+  - Time: Depends on sorting algorithm being used. 
+                     merge sort or heap sort - O(n logn) for all cases
+					 quick sort O(n logn) for best & average, O(n^2) for worst case
+  - Space: Again, depends on sorting algorithm. O(n) for merge sort and O(1) for Heap Sort.
+  
+2. Majority element
+  Majority element in an array of size n is an element that appears more than n/2 times (and hence there is at most one such element).
+  a. Method1 - HashMap
+  - Maintain a HashMap<Integer, Integer> with key&value as element&count.  
+  - For every element in the array, check if it exists in the HashMap
+    - If found, increment the count value.
+	- If not found, insert with count as 1.
+	- At any point, if the count becomes more than n/2, then return the value.
+  - Time: O(n) Space: O(n)
+  
+  b. Method2
+  - This is a two step process.
+  - step1: Find an element occurring most of the time in the array
+  - step2: check if the element obtained in step1 is majority element
+  
+  - step1: Moore's voting algorithm
+    - Initialise the first element as majority element and count as 1.
+	- For every element in the array,
+	  - if current element is same as majority element, increment count.
+	  - if current element is not same as majority element, decrement count.
+	  - if count reaches zero, change the majority element to the current element
+	- Return the majority element
+	- Time: O(n) Space: O(1)
+  - step2: 
+    - Find the number of occurrences for the majority element from step1.
+	- if occurrences is greater than n/2, return majority element
+	- if not there is no majority element
+	- Time: O(n) Space: O(1)
+  
+3. Given an array of positive integers. All numbers occur even number of times except one number which occurs odd number of times. 
+   Find the number in O(n) time & constant space.
+  - Initialize result as 0;
+  - For every element in the array, do bitwise XOR ^ operation;  res = res ^ element
+  - Finally result has the array element with odd occurrences.
+  - Time: O(n)
+  
+4. Largest sum contiguous subarray
+  - Maintain two values 1. sum of the current subarray, currSubArraySum 2. maximum sum of sub arrays encountered so far, maxSumSofar
+  - Initialize currSubArraySum as 0 and maxSumSofar as MIN_VALUE
+  - For every element in the array,
+    - add element to currSubArraySum
+	- if currSubArraySum is greater than maxSumSofar, set maxSumSofar = currSubArraySum	
+	  (set sub array start index as tempStartIndex and sub array end index as current position)
+	- if currSubArraySum is less than 0, reset currSubArraySum = 0 (set sub array tempStartIndex as current position's next)
+  - Time: O(n)
+
+5. Find an element x in an sorted rotated array
+  - Find the pivot index. ex. for array 3, 4, 5, 6, 1, 2 pivot index is 3. If array is not rotated at all, then pivot index is -1
+  - If we find pivot index, compare x with pivot element and return if it matches. stop
+  - If x is greater than a[0] then binary search in left array ie 0 to pivot-1
+    Else binary search in right array pivot+1 to N-1 (where N is array.size)
+  - Time: O(log n)
+	
+  - Find Pivot Index: (binary search variation)
+    - Base cases
+	        if (high < low)  return -1;
+            if (high == low) return low;
+    - Find the middle element
+	- if a[mid] > a[mid+1], then return mid as pivot index
+	- if a[mid-1] > a[mid], then return mid-1 as pivot index
+	- if a[low] > a[mid], then recursively find pivot in left array, ie low to mid-1
+	  else recursively find pivot in right array, ie  mid+1 to high
+  
+6. There are two sorted arrays. First one is of size m+n containing only m elements. Another one is of size n and contains n elements. 
+   Merge these two arrays into the first array of size m+n such that the output is sorted.
+  - Move m elements in the first array to end. (now the first n spaces would be empty)
+  - Start from nth element in first array and 0th element in second array, merge them into first array.
+  - Time: O(m+n)
+
+7. Given 2 sorted arrays A and B of size n each. Write an algorithm to find the median of the array 
+   obtained after merging the above 2 arrays(i.e. array of length 2n). The complexity should be O(log(n)) 
+  - Base cases: 
+	if (n <= 0)
+        return -1;
+    if (n == 1)
+        return (ar1[0] + ar2[0])/2;
+    if (n == 2)
+        return (max(ar1[0], ar2[0]) + min(ar1[1], ar2[1])) / 2;  
+		
+  - Find the median m1 of arr1
+  - Find the median m2 of arr2
+  - if m1 and m2 are same, return m1 or m2. stop
+  - if (m1 < m2), median lies between arr1[m1........] and arr2[.........m2]
+  - else if (m2 < m1), median lies between arr2[m2........] and arr1[........m1]
+ 
+8. Reverse an array
+  - Initialise left and right indexes as 0 and n-1 respectively
+  - While left < right do the following
+    - swap a[left] with a[right]
+	- increment left, decrement right
+  - Time: O(n)
+
+9. Array rotation - Reversal Algorithm
+  - Reverse 0 to d-1
+  - Reverse d to n-1
+  - Reverese 0 to n-1
+  - Time: O(n)
+
+10. Maximum sum such that no two elements are adjacent  
+  - Maintain two values 1. including the current element, incl and 2. excluding the current element, excl
+  - Initialize incl as a[0] and excl as 0
+  - incl = sum of excl with current element
+  - excl = max(incl or excl of previous element) 
+   [since we need previous element's incl and excl values, capture them before calculating the incl value of current element]
+  - Time: O(n)
+
+11. Write a program to print all the LEADERS in the array.An element is leader if it is greater than all the elements to its right side. 
+    And the rightmost element is always a leader. eg: for array {16, 17, 4, 3, 5, 2}, leaders are 17, 5 and 2.
+  - Keep track of the maxValue from the right most end of the array. Initially set the right most element as maxValue
+  - When the maxValue gets changed by any current element from right to left, then current element is a LEADER
+  - Time:O(n)
+
+12. Print the elements of an array in the decreasing frequency; if 2 numbers have same frequency then print the one which came 1st
+	E.g. 2 5 2 8 5 6 8 8 output: 8 8 8 2 2 5 5 6.
+  - Use any stable sorting algorithm. Merge sort is a stable algorithm
+  
+13. Count Inversions in an array
+    Inversion Count is how far (or close) the array is from being sorted. If array is already sorted then inversion count is 0. 
+	If array is sorted in reverse order that inversion count is maximum. a[i] and a[j] form an inversion if a[i] > a[j] and i < j 
+	eg: The sequence 2, 4, 1, 3, 5 has three inversions (2, 1), (4, 1), (4, 3).
+  - Implement merge sort
+  - In merge step, when a[i] > b[j], then all the elements after a[i] till mid is added to inversion count.
+  - Time: O(n log n) [merging step takes O(n), dividing into sub problems takes O(log n)]
+
+14. Algorithm to find if a given integer x appears more than n/2 times in a sorted array of n integers.
+  - Use binary search to find the first occurrence of x.
+  - How to find first occurence in binary search: 
+    arr[mid] is first occurrence if x is one of the following is true:
+        (i)  mid == 0 and arr[mid] == x
+        (ii) arr[mid-1] < x and arr[mid] == x
+  - Check if x is present in more than n/2 times.
+  - Time: O(log n)
+
+15. Maximum and minimum of an array using minimum number of comparisons
+  - Get the size of the array, N.
+  - If N is odd, initialize max and min as a[0] 
+  - If N is even, set max and min as the maximum and minimum of a[0] and a[1]
+  - For remaining elements in the array, take them as a pair.
+  - Update max and min value to the maximum and minimum of the pair.
+  - Time: O(n)  
+
+16. You are given an array of 0s and 1s in random order. Segregate 0s on left side and 1s on right side of the array.
+  - Maintain two indexes. Initialize left index as 0 and right index as n-1.
+  - Loop until left < right
+    - Keep incrementing left index until 1 encountered
+	- Keep decrementing right index until 0 encountered
+	- Swap a[left] with a[right], increment left, decrement right
+  - Time: O(n)
+
+17. Given an array of integers, find out maximum difference between any two elements such that larger element appears after the smaller number in array.
+  - Maintain two values, 1. minimum element found so far 2. max difference found so far.
+  - Initialise min = a[0] and maxDiff = a[1] - a[0]
+  - For every element from 1 to N-1
+    - Update maxDiff, if maxDiff < a[i] - min
+	- Update min, if a[i] < min
+  - Time:O(n)
+  
+18. Union and Intersection of two sorted arrays
+  Union
+  - Maintain two indexes i for arr1 and j for arr2 
+  - Initialise i = 0 and j = 0
+  - Loop until i < m and j < n, where m is length of arr1 and n is length of arr2
+    - if arr1[i] < arr2[j], add arr1[i] to result set, U. Increment i
+    - if arr1[i] > arr2[j], add arr2[j] to U. Increment j
+    - if arr1[i] == arr2[j], add any one to U and Increment both i and j
+  - If i < m, Add the remaining elements of arr1 to U
+  - If j < n, Add the remaining elements of arr2 to U
+  - Set U holds the result
+  - Time: O(m+n)
+  
+  Intersection
+  - Maintain two indexes i for arr1 and j for arr2 
+  - Initialise i = 0 and j = 0
+  - Loop until i < m and j < n, where m is length of arr1 and n is length of arr2
+    - if arr1[i] < arr2[j], then increment i
+    - if arr1[i] > arr2[j], then increment j
+  - if arr1[i] == arr2[j], add any one to result set U and increment both i and j
+  - Set U holds the result
+  - Time: O(m+n)
+
+19. Union and intersection of two arrays
+  Sorting 
+  - Sort both the arrays. It takes O(mLogm + nLogn)
+  - Use above steps for union and intersection for two sorted arrays
+  
+  Sorting and Searching
+  Union
+  - Initialize result set U as empty
+  - Find the smaller of m and n and sort the smaller array
+  - Add all the elements of sorted array to U
+  - For every element x in larger array
+    - Binary search x in smaller array. If x is not present, the add to U
+  - Set U holds the result
+  - Time: min[O(m+n Logm), O(m+n Logn)]
+  
+  Intersection
+  - Initialize result set U as empty
+  - Find the smaller of m and n and sort the smaller array
+  - For every element x in larger array
+    - Binary search x in smaller array. If x is present, the add to U
+  - Set U holds the result
+  - Time: min[O(m+n Logm), O(m+n Logn)]
+   
+20. Given a sorted array and a value x, the ceiling of x is the smallest element in array greater than or equal to x, 
+    and floor is the greatest element smaller than or equal to x. Write efficient functions to find floor and ceiling of x.
+  Ceil
+  - If x is smaller than or equal to first element in array, then return a[0]
+  - Else binary search of an index i such that x lies between a[i] and a[i+1]
+    - If x is smaller than or equal to the first element, then return the first element
+    - If x is greater than the last element, then return -1
+	- Find the index of the middle element, say mid
+	- if a[mid] == x, return mid
+	- If x is greater than arr[mid], then either arr[mid + 1] is ceiling of x or ceiling lies in arr[mid+1...high]
+	- If x is smaller than arr[mid], then either arr[mid] is ceiling of x or ceiling lies in arr[low...mid-1]
+  - Time: O(Logn)
+	
+21. Given an array arr[] of n integers, construct a Product Array prod[] (of same size) such that 
+   prod[i] is equal to the product of all the elements of arr[] except arr[i]
+  - Maintain two arrays left[] and right[] of length same as arr[i]
+  - Initially set left[0] as 1 and right[n-1] as 1
+  - For every element in the array from index 1 to N-1, left[i] = left[i-1] * arr[i-1]
+  - For every element in the array from index N-2 to 0, right[j] = right[j+1] * arr[j+1]
+  - Construct the product array by multiplying left[i] and right[i], storing the result in prod[i]
+  - Time:O(n) Space: O(n)
+  
+22. Given an array consisting of 0s, 1s and 2s, write a function that sorts A[], ie. put all 0s first, then all 1s and all 2s in last.
+    Dutch National Flag problems
+  - Maintain three values, left = 0, curr = 0, right = n-1
+  - Loop until curr <= right
+    - if a[curr] is 0, swap a[left] with a[curr]. Increment curr and left
+	- else if a[curr] is 2, swap a[right] with a[curr]. Decrement right. Note curr is not incremented here
+	- else, increment curr only
+  - Time:O(n)
+  
+23. Given an unsorted array arr[0..n-1] of size n, find the minimum length subarray arr[s..e] 
+    such that sorting this subarray makes the whole array sorted.
+  - Scan the array from left to right, and find the index s such that, a[s] is greater than a[s+1]
+  - Similarly, scan the array from right to left and find the index e such that, a[e] < a[e-1]
+  - Now, we need to check whether sorting this subarray makes the complete array sorted
+  - Find the minimum and maximum element in the subarray from indices s to e, say min and max
+  - Find the first element, if there is any, in arr from 0 to s-1, which is greater than min.
+    If found change the index of s to this element.
+  - Find the last element, if there is any, in arr from e+1 to n-1, which is smaller than max.
+    If found change the index of e to this element.
+  - s and e holds the start and end of the subarray.
+  - Time: O(n)
+  
+24. Given an array of n elements which contains elements from 0 to n-1, with any of these numbers appearing any number of times. 
+    Find these repeating numbers in O(n) and using only constant memory space.
+  - For every element in the array, from 0 to n-1,
+    - Check the sign value at index abs(arr[i])
+	- If its positive, then make it negative. arr[abs(arr[i])] = - arr[abs(arr[i])]
+	- If its already negative, then abs(arr[i]) is a repetition
+ - This will work only if the elements are in the range of 0 to n-1.
+ - Time:O(n)
+
+25. Equilibrium index of an array is an index such that the sum of elements at lower indexes is equal to the sum of elements at higher indexes. 
+    For example, in an array A [-7, 1, 5, 2, -4, 3, 0]
+    A[0] = -7, A[1] = 1, A[2] = 5, A[3] = 2, A[4] = -4, A[5] = 3, A[6]=0
+    3 is an equilibrium index, because: A[0] + A[1] + A[2] = A[4] + A[5] + A[6]
+  - Maintain, leftSum initially set to 0
+  - For every element from 0 to n-1, find the total sum of all elements say, sum.
+  - For every element from 0 to n-1, subract a[i] from sum. (now sum indicates the right sum)
+    - If leftSum == sum, then i is an equilibrium index
+    - add a[i] to leftSum
+  - Time:O(n)
+
+26. Rotate an NxN matrix by 90 degrees
+  - Rotate the matrix in layers. Starting from Outermost circular layer, inner ciruclar layer and moving inwards
+  - Move top edge to right edge, right edge to bottom edge, bottom edge to left edge and 
+    left edge to top edge.
+  - Loop for every layer from 0 to n/2 - 1
+    - Maintain two values indicating the first and last boundary of the layer
+	- Set first = layer; last = n - 1 - layer;
+	- For every element i from first to last in the layer
+	  - To pick the elements by reducing one from last after every iteration of i
+	    we need to calculate offset = i - first
+	  - Save the top; top = m[first][i]
+	  - left to top; m[first][i] = m[last - offset][first]
+	  - bottom to left; m[last - offset][first] = m[last][last - offset]
+	  - right to bottom; m[last][last - offset] = m[i][last] 
+	  - top to right; m[i][last] = top
+  - Time:O(n^2)
+ 
+27. Rotate an MxN matrix by 90 degress
+  - when we rotate a source matrix of MxN, we get a target matrix of NxM
+  - We do need a new additional space to store the target matrix
+  - First row of source --> last column of target
+  - Second row of source --> last but one column of target
+  - last row of source --> first column of target
+  - For every row r from 0 to m-1
+    - For every column c from 0 to n-1
+      - target[c][m-1-r] = source[r][c]	
+  - Time:O(n^2)
+
+28. Given an array, print the Next Greater Element (NGE) for every element. The Next greater Element for an element x is 
+    the first greater element on the right side of x in array. Elements for which no greater element exist, next greater element as -1.
+	ex:  Input array [4, 5, 2, 25] next greater element is {5, 25, 25, -1}
+  - Push the first element to the stack
+  - For every element from 1 to n-1
+    - set next = a[i]
+    - if stack is not empty, pop the stack, say element
+	  - if popped element is smaller than next, then print the pair
+	  - keep popping the stack while elements are smaller than next and stack is not empty
+	  - if stack becomes emptpy while popping, or popped element is greater than next, 
+	    push element to stack 
+	- if stack is empty push next to stack
+  - Time:O(n) Space:O(n)
+
+29. Given an unsorted array of numbers, write a function that returns true if array consists of consecutive numbers.
+    Examples:
+    a) If array is {5, 2, 3, 1, 4}, then the function should return true because the array has consecutive numbers from 1 to 5.
+    b) If array is {83, 78, 80, 81, 79, 82}, then the function should return true because the array has consecutive numbers from 78 to 83.
+    c) If the array is {34, 23, 52, 12, 3 }, then the function should return false because the elements are not consecutive.
+    d) If the array is {7, 6, 5, 5, 3, 4}, then the function should return false because 5 and 5 are not consecutive.
+  - The idea is to check for following two conditions. If following two conditions are true, then return true.
+    1. max – min + 1 = n where max is the maximum element in array, min is minimum element in array and n is the number of elements in array.
+    2. All elements are distinct.
+	- To check all the elemements are distinct, maintain a visited array of length n. map the ith element in the array to the visited[a[i] - min]
+  - Time: O(n) Space:O(n)
+
+30. Given a sorted array of n integers where each integer is in the range from 0 to m-1 and m > n. 
+    Find the smallest number that is missing from the array.
+	Examples
+	Input: {0, 1, 2, 6, 9}, n = 5, m = 10
+	Output: 3
+	Input: {4, 5, 10, 11}, n = 4, m = 12
+	Output: 0
+	Input: {0, 1, 2, 3}, n = 4, m = 5
+	Output: 4
+	Input: {0, 1, 2, 3, 4, 5, 6, 7, 10}, n = 9, m = 11
+	Output: 8
+  - In the standard Binary Search process, the element to be searched is compared with the middle element and on the basis of comparison result, 
+    we decide whether to search is over or to go to left half or right half.
+  - In this method, we modify the standard Binary Search algorithm to compare the middle element with its index and make decision on the basis of this comparison.
+  - If the first element is not same as its index then return first index
+  - Else get the middle index say mid
+	 a) If arr[mid] greater than mid then the required element lies in left half.
+	 b) Else the required element lies in right half.
+  - Time: O(Logn) 
+  - Note: This doesn’t work if there are duplicate elements in the array.
+
+31. Given a sorted array arr[] and a number x, write a function that counts the occurrences of x in arr[].
+	Input: arr[] = {1, 1, 2, 2, 2, 2, 3,},   x = 2
+	Output: 4 // x (or 2) occurs 4 times in arr[]
+	Input: arr[] = {1, 1, 2, 2, 2, 2, 3,},   x = 3
+	Output: 1 
+	Input: arr[] = {1, 1, 2, 2, 2, 2, 3,},   x = 1
+	Output: 2 
+	Input: arr[] = {1, 1, 2, 2, 2, 2, 3,},   x = 4
+	Output: -1 // 4 doesn't occur in arr[] 
+  - Use Binary search to get index of the first occurrence of x in arr[]. Let the index of the first occurrence be i
+    -  if( ( mid == 0 || x > arr[mid-1]) && arr[mid] == x)
+		  return mid;
+		else if(x > arr[mid])
+		  return first(arr, (mid + 1), high, x, n);
+		else
+		  return first(arr, low, (mid -1), x, n);
+  - Use Binary search to get index of the last occurrence of x in arr[]. Let the index of the last occurrence be j.
+	- if( ( mid == n-1 || x < arr[mid+1]) && arr[mid] == x )
+		return mid;
+	  else if(x < arr[mid])
+        return last(arr, low, (mid -1), x, n);
+      else
+         return last(arr, (mid + 1), high, x, n); 
+  - Return (j – i + 1); 
+  - Time: O(Logn)
+
+32. Given an array arr[], find the maximum j – i such that arr[j] > arr[i]
+  - Construct two auxiliary arrays LMin[] and RMax[] such that 
+    LMin[i] holds the smallest element on left side of arr[i] including arr[i], and 
+	RMax[j] holds the greatest element on right side of arr[j] including arr[j]. 
+  - Maintain two pointers i, j for LMin and RMax respectively and maxDiff = 0
+  - Loop while i<n and j<n-1
+    - if LMin[i] < RMax[j]
+	  - Update maxDiff, if j-i is greater than maxDiff
+	  - Increment j
+	else 
+	  - Increment i
+  - Time: O(n) Space:O(n)
+
+33. Given two arrays: arr1[0..m-1] and arr2[0..n-1]. Find whether arr2[] is a subset of arr1[] or not. Both the arrays are not in sorted order.
+	Examples:
+	Input: arr1[] = {11, 1, 13, 21, 3, 7}, arr2[] = {11, 3, 7, 1}
+	Output: arr2[] is a subset of arr1[]
+	Input: arr1[] = {1, 2, 3, 4, 5, 6}, arr2[] = {1, 2, 4}
+	Output: arr2[] is a subset of arr1[]
+	Input: arr1[] = {10, 5, 2, 23, 19}, arr2[] = {19, 5, 3}
+	Output: arr2[] is not a subset of arr1[]
+	Sorting & searching
+  - Sort the first array arr1
+  - For every element in arr2, do binary search in sorted array arr1
+  - If the element i is not found then return false
+  - If all elements are present then return true
+  - Time: O(mLogm + nLogm) 
+          mLogm - for sorting algorithm. nLogm - to binary search n elements in array of size m 
+          
+	
+	Sorting & merging
+  - Sort both the arrays arr1 and arr2
+  - Use merge type method to see if all elements of arr2 is present in arr1	
+  - Time: O(mLogm + nLogn)
+          mLogm - sort arr1, nLogn - sort arr2
+		  
+34. Given an unsorted array arr[] and two numbers x and y, find the minimum distance between x and y in arr[]. 
+    The array might also contain duplicates. You may assume that both x and y are different and present in arr[].
+    Examples:
+	Input: arr[] = {1, 2}, x = 1, y = 2
+	Output: Minimum distance between 1 and 2 is 1.
+	Input: arr[] = {3, 4, 5}, x = 3, y = 5
+	Output: Minimum distance between 3 and 5 is 2.
+	Input: arr[] = {3, 5, 4, 2, 6, 5, 6, 6, 5, 4, 8, 3}, x = 3, y = 6
+	Output: Minimum distance between 3 and 6 is 4.
+	Input: arr[] = {2, 5, 3, 5, 4, 4, 2, 3}, x = 3, y = 2
+	Output: Minimum distance between 3 and 2 is 1.
+  - Traverse the array from left to right and stop if either x or y is found.
+  - Store the index of this first occurrence in a variable say prev.
+  - Maitain the minDist value and initially set to MAX_VALUE
+  - Traverse the array from  i = prev to n-1 to find for either x or y
+    - If found, and if current element is different from prev element  
+	 and if this distance (i-prev)value is smaller than minimm distance so far, update minDist
+	- If the current is same as prev element, update prev index to i
+  - Finally return the minDist
+  - Time: O(n)
+
+35. Given an array A[0 … n-1] containing n positive integers, a subarray A[i … j] is bitonic 
+    if there is a k with i <= k <= j such that A[i] <= A[i + 1] ... <= A[k] >= A[k + 1] >= .. A[j – 1] > = A[j]. 
+	Write a function that takes an array as argument and returns the length of the maximum length bitonic subarray.
+	Simple Examples
+	1) A[] = {12, 4, 78, 90, 45, 23}, the maximum length bitonic subarray is {4, 78, 90, 45, 23} which is of length 5.
+	2) A[] = {20, 4, 1, 2, 3, 4, 2, 10}, the maximum length bitonic subarray is {1, 2, 3, 4, 2} which is of length 5.
+	Extreme Examples
+	1) A[] = {10}, the single element is bitnoic, so output is 1.
+	2) A[] = {10, 20, 30, 40}, the complete array itself is bitonic, so output is 4.
+	3) A[] = {40, 30, 20, 10}, the complete array itself is bitonic, so output is 4.
+  - Construct an auxiliary array inc[] from left to right such that inc[i] contains length of the nondecreaing subarray ending at arr[i].
+	For for A[] = {12, 4, 78, 90, 45, 23}, inc[] is {1, 1, 2, 3, 1, 1}
+  - Construct another array dec[] from right to left such that dec[i] contains length of nondecreasing subarray starting at arr[i].
+	For A[] = {12, 4, 78, 90, 45, 23}, dec[] is {2, 1, 1, 3, 2, 1}.
+  - Once we have the inc[] and dec[] arrays, all we need to do is find the maximum value of (inc[i] + dec[i] – 1).
+	For {12, 4, 78, 90, 45, 23}, the max value of (inc[i] + dec[i] – 1) is 5 for i = 3.
+  - Time:O(n) Space:O(n)
+
+36. Given an array of integers which is initially increasing and then decreasing, find the maximum value in the array.
+	Input: arr[] = {8, 10, 20, 80, 100, 200, 400, 500, 3, 2, 1}
+	Output: 500
+	Input: arr[] = {1, 3, 50, 10, 9, 7, 6}
+	Output: 50
+	Corner case (No decreasing part)
+	Input: arr[] = {10, 20, 30, 40, 50}
+	Output: 50
+	Corner case (No increasing part)
+	Input: arr[] = {120, 100, 80, 20, 0}
+	Output: 120
+  - Its a variation of binary search
+  - If the middle element is greater than both its adjacents, ie a[mid-1] < a[mid] > a[mid+1], then middle element is the result
+  - If the middle element is greater the previous element and smaller than the next element, then search in right side of the middle element
+  - If the middle element is smaller than the previous element and greater than the next element, then search in left side of middle element
+  - Base cases:
+    - Only one element is present in arr[low..high]
+	  if (low == high)
+        return arr[low];
+    - If there are two elements and first is greater, then the first element is result
+	- If there are two elements and second is greater then the second element is result
+
+37. Implement two stacks in an array
+  - Maintain two stacks at the two extreme ends of the arr[]
+  - stack1 grows from 0 to n-1, first element in stack1 is pushed at index 0, then 1, 2, etc
+  - Initial value of top1 is -1
+  - stack2 grows from n-1 to 0, first element in stack2 is pushed at index n-1, then n-2, n-3 etc
+  - Initial value of top2 is n
+  - Push1: if (top1 < top2 - 1) then, increment top1 and insert at index pointed by top1 
+           else stack overflow
+  - Push2: if (top1 < top2 - 1) then, decrement top2 and insert at index pointed by top2
+           else stack overflow
+  - Pop1: if (top1 >= 0) return a[top1] and decrement top1
+          else stack underflow
+  - Pop2: if (top2 < size) return a[top2] and increment top2
+          else stack underflow
+  - Time: O(1) for all four operations
+
+38. Implement K stacks in an array
+  - Maintain two arrays, top, next and value free:
+    - top[]: size k and stores indexes of top elements in all stacks. 
+	  All entries in top[] are initialized as -1 to indicate that all stacks are empty.
+	- next[]: size n and stores the indexes of next item for the items in array arr[]
+	  All entries next[i] are initialized as i+1 because all slots are free initially and pointing to next slot. 
+	  Last slot in next array is set to -1, indicating end of free list
+	- free: integer, stores the index of next available free slot. Initially set to 0
+	        -1 in free indicates the end of free list hence all stacks are full.
+  - Push(int item, int stackNumber): 
+    - if free is -1, stack overflow return
+	- Store the index of next free slot in a temp variable, i = free
+	- Update the index of next free slot to index of next slot, free = next[i]
+	- Make next[i] points FROM next available position TO previous occupied position of that stack.
+	  next[i] = top[stackNumber]
+	- Update the top of stack to point to current item index, top[stackNumber] = i
+	- Put the item in the array, a[i] = item
+  - Pop(int stackNumber)
+    - if top[stackNumber] is -1, then stack underflow return
+	- Get the index of the top element of the stack into i = top[stackNumber]
+	- Update top to the previously inserted index, top[stackNumber] = next[i]
+	- Make next[i] points FROM previous occupied position of that stack TO next available position.
+	  next[i] = free;
+	- Update free to the current top index, free = i
+	- Return the item a[i]
+  - Time: push & pop is O(1)
+
+39. Find subarray with given sum
+    Given an unsorted array of nonnegative integers, find a continous subarray which adds to a given number.
+    Examples:
+	Input: arr[] = {1, 4, 20, 3, 10, 5}, sum = 33
+	Ouptut: Sum found between indexes 2 and 4
+	Input: arr[] = {1, 4, 0, 0, 3, 10, 5}, sum = 7
+	Ouptut: Sum found between indexes 1 and 4
+	Input: arr[] = {1, 4}, sum = 0
+	Output: No subarray found  
+  - Maintain two values 
+    currSum: indicates the sum of the current sub array. Initially set to a[0]
+	start: start indicates the starting index of the current sub array. Initially set to 0.
+  - For every element from 1 to n-1, 
+    - Keep adding a[i] to currSum
+	- when currSum exceeds sum, remove the starting elements by using start variable while 
+	  currSum is greater than sum and start < i-1 
+	  - currSum = currSum - a[start];
+	    start++;
+  - Time:O(n)
+  
+40. Given an array and a value, find if there is a triplet in array whose sum is equal to the given value. 
+    If there is such a triplet present in array, then print the triplet and return true. Else return false. 
+	eg, if the given array is {12, 3, 4, 1, 6, 9} and given sum is 24, then there is a triplet (12, 3 and 9)
+  - Sort the input array
+  - Fix the first element as a[i] where i = 0 to n-3
+    - Find other two elements by having indexes at two ends of the array 
+	  left = i+1, right = n-1
+	- if a[i] + a[left] + a[right] == sum print them
+	- else if a[i] + a[left] + a[right] < sum, increment left
+	- else increment right
+  - Time:O(n^2)
+  
+41. Find four elements that sum to a given value | O(n^3)
+	Given an array of integers, find all combination of four elements in the array whose sum is equal to a given value X.
+	For example, if the given array is {10, 2, 3, 4, 5, 9, 7, 8} and X = 23, then your function should print “3 5 7 8″ (3 + 5 + 7 + 8 = 23).  
+  - Sort the input array
+  - Fix the first element as a[i] where i = 0 to n-3
+    - Fix the second element as a[j] where j = i+1 to n-20
+	  - Find other two elements by having indexes at two ends of the array 
+		  left = j+1, right = n-1
+	  - if a[i] + a[j] + a[left] + a[right] == sum print them
+	  - else if a[i] + a[j] + a[left] + a[right] < sum, increment left
+	  - else increment right
+  - Time:O(n^3)
+
+42. Find four elements that sum to a given value | O(n^2 Logn)
+	Given an array of integers, find all combination of four elements in the array whose sum is equal to a given value X.
+	For example, if the given array is {10, 2, 3, 4, 5, 9, 7, 8} and X = 23, then your function should print “3 5 7 8″ (3 + 5 + 7 + 8 = 23).
+  - Let the input array be A[]. Create an auxiliary array aux[] and store sum of all possible pairs in aux[]. 
+    The size of aux[] will be n*(n-1)/2 where n is the size of A[].
+  - Sort the auxiliary array aux[].
+  - Now the problem reduces to find two elements in aux[] with sum equal to X. 
+  - We can use two element sum pointer technique to find the two elements.
+  - An element of aux[] represents a pair from A[]. While picking two elements from aux[], 
+    we must check whether the two elements have an element of A[] in common. 
+	For example, if first element sum of A[1] and A[2], and second element is sum of A[2] and A[4], 
+	then these two elements of aux[] don’t represent four distinct elements of input array A[].
+  - Time:O(n^2 Logn)
+  
+43. Given an array of n integers, find the 3 elements such that a[i] < a[j] < a[k] and i < j < k in 0(n) time. 
+    If there are multiple such triplets, then print any one of them.
+  - Maintain two arrays smaller, greater of size n
+  - smaller[i] should store the index of the number which is smaller than arr[i] and is on the left side of arr[i]
+    smaller[i] should  contain -1 if there is no such element.
+	- Set smaller[0] to -1 and min = 0
+	- For every element from 1 to n-1
+	  - if (arr[i] <= arr[min]) then min = i; smaller[i] = -1;
+	    else smaller[i] = min
+  - greater[i] should store the index of a number which is greater than arr[i] and is on right side of arr[i]. 
+    greater[i] should contain -1 if there is no such element.
+	- Set greater[n-1] to -1 and max = n-1
+	- For every element from n-2 to 0
+	  - if (arr[i] >= arr[max]) max = i; greater[i] = -1
+	    else greater[i] = max
+  - Finally traverse both smaller[] and greater[] and find the index i for which both smaller[i] and greater[i] are not -1.
+  - Time:O(n) Space:O(n)
+
+
+44. Given an array of integers, replace every element with the next greatest element (greatest element on the right side) in the array. 
+    Since there is no element next to the last element, replace it with -1. 
+	eg, if the array is {16, 17, 4, 3, 5, 2}, then it should be modified to {17, 5, 5, 5, 2, -1}.
+  - Its similar to the leader problem.
+  - Initialize max = a[n-1]
+  - Traverse the array from right to left, i = n-2 to 0
+    - Save the current element in temp = a[i]
+	- Set current element to the greatest element to the right, a[i] = max
+	- Update max if temp > max, max = temp
+  - O(n)
+
+45. Given an array of integers where each element represents the max number of steps that can be made forward from that element. 
+    Write a function to return the minimum number of jumps to reach the end of the array (starting from the first element). 
+	If an element is 0, then cannot move through that element.
+	Example:
+	Input: arr[] = {1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9}
+	Output: 3 (1-> 3 -> 8 ->9)
+	First element is 1, so can only go to 3. Second element is 3, so can make at most 3 steps eg to 5 or 8 or 9.
+	Method1: Top Down approach
+  - jumps[i] -> minimum number of jumps to reach a[i] from a[0]
+  - Initially set jumps[0] = 0
+  - Intention is to fill jumps array and finally jumps[n-1] holds the result
+  - For every element in array i from 1 to n-1
+    - jumps[i] = INT_MAX
+	- For every element j from 0 to i-1
+      - if i is reachable from j, ie i <= j + a[j] and a[j] is not INT_MAX
+        - Assign jumps[i] as Minimum between jumps[i] and jumps[j] + 1
+  - Finally return jumps[n-1]
+  - Time: O(n^2)
+
+46. Longest increasing subsequence
+    The longest Increasing Subsequence (LIS) problem is to find the length of the longest subsequence of a given sequence 
+	such that all elements of the subsequence are sorted in increasing order. 
+	eg, length of LIS for { 10, 22, 9, 33, 21, 50, 41, 60, 80 } is 6 and LIS is {10, 22, 33, 50, 60, 80}
+  - lis[i] -> contains the length of the longest increasing subsequence from a[0] till a[i]
+  - Objective is to fill list array and finally maximum value of lis[i] is the result 
+  - Initially set all elements of lis[i] to 1, meaning considering the element a[i] alone for the subsequence
+  - For every element i from 1 to n-1
+    - For every element j from 0 to i-1
+      - If element at index i is greater than element at index j and
+        length of lis to reach i is less than length of lis to reach j + 1, then set 
+		length of lis to reach i to length of lis to reach j + 1
+		if (a[i] > a[j] && lis[i] < lis[j] + 1) then lis[i] = lis[j] + 1
+  - Return the maximum value of lis[i]
+  - Time:O(n^2)
+
+47. Maximum Sum Increasing Subsequence
+    Given an array of n positive integers. Write a program to find the sum of maximum sum subsequence of the given array 
+	such that the intgers in the subsequence are sorted in increasing order. 
+	eg, if input is {1, 101, 2, 3, 100, 4, 5}, then output should be 106 (1 + 2 + 3 + 100), 
+	if the input is {3, 4, 5, 10}, then output is 22 (3 + 4 + 5 + 10) and if input is {10, 5, 4, 3}, then output should be 10
+  - Its a variation of LIS. Instead of length of subsequence, we need to maintain the sum of increasing subsequence
+  - msis[i] -> contains the maximum sum of increasing subsequence from a[0] till a[i]
+  - Objective is to fill msis array and finally maximum value in msis is the result
+  - Initially set all elements of msis[i] to a[i], meaning considering the element a[i] alone for the subsequence
+  - For every element i from 1 to n-1
+    - For every element j from 0 to i-1
+	  - If element at index i is greater than element at index j and
+        sum of lis till i is less than sum of lis till j + a[i], then set 
+		sum of lis till i to sum of lis till reach j + a[i]
+		if (a[i] > a[j] && msis[i] < msis[j] + a[i]) then msis[i] = msis[j] + a[i]
+  - Return the maximum value in msis[i]
+  - Time:O(n^2) 
+
+48. Longest Bitonic Subsequence
+    Given an array arr[0 … n-1] containing n positive integers, a subsequence of arr[] is called Bitonic if it is first increasing, then decreasing. 
+	Write a function that takes an array as argument and returns the length of the longest bitonic subsequence.
+	Input arr[] = {1, 11, 2, 10, 4, 5, 2, 1};
+	Output: 6 (A Longest Bitonic Subsequence of length 6 is 1, 2, 10, 4, 2, 1)
+	Input arr[] = {12, 11, 40, 5, 3, 1}
+	Output: 5 (A Longest Bitonic Subsequence of length 5 is 12, 11, 5, 3, 1)
+	Input arr[] = {80, 60, 30, 40, 20, 10}
+	Output: 5 (A Longest Bitonic Subsequence of length 5 is 80, 60, 30, 20, 10)
+  - Its a variation of LIS. We need to build two arrays, lis[i] and lds[i]
+  - lis[i] -> stores the length of lis from a[0] to a[i]
+  - lds[i] -> stores the lenth of longest decreasing subsequence starting from a[i] to a[n-1]
+  - Maximum value of lis[i] + lds[i] -1 is the result
+  - Build lds: Initially set lds[i] = 1 
+    - For every element i from n-2 to 0 
+	  - For every element j from n-1 to i-1
+	    - If element at index i is greater than element at index j and
+          length of lds from i is less than length of lds from j + 1, then set 
+		  length of lds from i to length of lds from reach j + 1
+		  if (a[i] > a[j] && lds[i] < lds[j] + 1) then lds[i] = lds[j] + 1 
+  - Time:O(n^2)
+
+49. Maximum Length Chain of Pairs
+	You are given n pairs of numbers. In every pair, the first number is always smaller than the second number. 
+	A pair (c, d) can follow another pair (a, b) if b < c. Chain of pairs can be formed in this fashion. 
+	Find the longest chain which can be formed from a given set of pairs. 
+	For example, if the given pairs are {{5, 24}, {39, 60}, {15, 28}, {27, 40}, {50, 90} }, 
+	then the longest chain that can be formed is of length 3, and the chain is {{5, 24}, {27, 40}, {50, 90}}
+  - This is a variation of LIS
+  - mcl[i] -> contains the maximum chain length ending at a[i]
+  - a[i] contains the given pairs sorted by the first element. Its size is n
+  - Now run lis where we compare the first element of new element with the second element of already constructed mcl
+    if ( arr[i].a > arr[j].b && mcl[i] < mcl[j] + 1)
+            mcl[i] = mcl[j] + 1;
+  - Return the maximum value in msis[i]
+  - Time:O(n^2)
+
+50. Longest Monotonically Increasing Subsequence NlogN
+  - We need to maintain set of active 
+  - If A[i] is smallest among all end candidates of active lists, we will start new active list of length 1.
+  - If A[i] is largest among all end candidates of active lists, we will clone the largest active list, and extend it by A[i].
+  - If A[i] is in between, we will find ceiling element to A[i] & replace it. Clone and extend this list by A[i]. 
+  - tailIndices[i] : array of size n, to keep the index of tail elements ie. subsequence ending with this element
+  - prevIndices[i] : array of size n, to keep track of previous element index in the subsequence. Required to finally print the lis
+  - len : an integer to keep track of the longest subsequence so far.
+  - Initially set tailIndices[0] = 0 and prevIndices[0] = -1 and len=1;
+  - For every element i in the array a[] from 1 to n-1
+    - if a[i] is smaller than a[0], replace the smallest value, ie tailIndices[0] = i
+	- else if a[i] is bigger than a[len-1], extend largest subsequence, ie tailIndices[len++] = i.
+	  - Before extending the subsequence capture the previous element index by prevIndices[i] = tailIndices[len-1]
+	- else if a[i] is in between a[0] and a[len-1], find the ceil index tail end elements
+      - Replace the ceil tail element with a[i]
+      - Capture the previous element index, prevIndices[i] = tailIndices[pos-1]
+  - Print the subsequence starting with tailIndices[len-1] and navigating with prevIndices[i]
+  - Time: O(NlogN)
+
+51. Maximum product subarray
+  - Maintain three arrays of size n, positiveProducts[i], negativeProducts[i], maxProducts[i] 
+  - Initially set positiveProducts[0] = a[0], negativeProducts = a[0], maxProducts = a[0] 
+  - For every element i from 1 to n-1
+    - int currPositive = positiveProducts[i-1] * a[i]  
+	- int currNegative = negativeProducts[i-1] * a[i]
+	- positiveProducts[i] = max(max(currPositive, currNegative), a[i])
+	- negativeProducts[i] = min(min(currPositive, currNegative), a[i])
+	- maxProducts[i] = max(maxProducts[i-1], positiveProducts[i])
+  - Finally maxProducts[n-1] holds the result.
+  
+52. Find if there is a subarray with 0 sum
+	Given an array of positive and negative numbers, find if there is a subarray (of size at-least one) with 0 sum.
+	Examples:
+	Input: {4, 2, -3, 1, 6}
+	Output: true 
+	There is a subarray with zero sum from index 1 to 3.
+	Input: {4, 2, 0, 1, 6}
+	Output: true 
+	There is a subarray with zero sum from index 2 to 2.
+	Input: {-3, 2, 3, 1, 6}
+	Output: false
+	There is no subarray with zero sum.
+  - The idea is to iterate through the array and for every element arr[i], calculate sum of elements form 0 to i. 
+    If the current sum has been seen before, then there is a zero sum array. 
+	Hashing is used to store the sum values, so that we can quickly store sum and find out whether the current sum is seen before or not.
+  - Maintain a hashmap<Integer, Integer> with sum, i as key value pair.
+  - For every element i from 0 to n-1
+    - Add current element to sum
+    - Return true, if current element is 0, or sum is 0 or this sum has been seen before.
+  - Time: O(n)
+
+53. Pythagorean Triplet in an array
+	Given an array of integers, write a function that returns true if there is a triplet (a, b, c) that satisfies a2 + b2 = c2.
+	Example:
+	Input: arr[] = {3, 1, 4, 6, 5}
+	Output: True
+	There is a Pythagorean triplet (3, 4, 5).
+	Input: arr[] = {10, 4, 6, 12, 5}
+	Output: False
+	There is no Pythagorean triplet.
+  - Do square of every element in input array. This step takes O(n) time.
+  - Sort the squared array in increasing order. This step takes O(nLogn) time.
+  - To find a triplet (a, b, c) such that a = b + c, do following.
+    - Fix 'a' as last element of sorted array.
+    - Now search for pair (b, c) in subarray between first element and 'a'. 
+	  A pair (b, c) with given sum can be found in O(n) time using meet in middle algorithm.
+    - If no pair found for current 'a', then move 'a' one position back and repeat step 3.b.
+  - Time:O(n^2)
+
+54. Find the largest pair sum in an unsorted array
+    Given an unsorted of distinct integers, find the largest pair sum in it. For example, the largest pair sum in {12, 34, 10, 6, 40} is 74.
+  - Initialize both first and second largest elements to the biggest and smallest of first two elements
+    first = max(arr[0], arr[1])
+    second = min(arr[0], arr[1])
+  - For every element i from 2 to n-1
+    - If the current element is greater than first, then update first and second. 
+    - Else if the current element is greater than second then update second
+  - Sum of first and second is the result
+  - Time:O(n)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -93,6 +93,13 @@ Arrays
 8. Dutch National flag
 9. Find the Minimum length Unsorted Subarray, sorting which makes the complete array sorted
 10. Turn an image by 90 degree
+11. Count the number of occurrences in a sorted array
+12.  
+
+
+Java
+-----
+1. final, finally, finalize
 
 
 

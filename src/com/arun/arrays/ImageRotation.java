@@ -46,7 +46,7 @@ public class ImageRotation {
 	
 	public static void main(String[] args) {
 		int rows = 3;
-		int cols = 4;
+		int cols = 3;
 		int count = 1;
 		int[][] a = new int[rows][cols];
 		for (int i = 0; i < rows; i++) {
@@ -57,9 +57,11 @@ public class ImageRotation {
 		
 		
 		Utils.printMatrix(a);
-//		new ImageRotation().rotate(a, 3);
-		System.out.println("result");
-		Utils.printMatrix(new ImageRotation().rotate(a, 3, 4));
+		new ImageRotation().rotate(a, a.length);
+		System.out.println("After rotation:");
+		Utils.printMatrix(a);
+//		System.out.println("result");
+//		Utils.printMatrix(new ImageRotation().rotate(a, 3, 4));
 		
 		
 		

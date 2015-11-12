@@ -733,14 +733,9 @@ Arrays
 52. Find if there is a subarray with 0 sum
 	Given an array of positive and negative numbers, find if there is a subarray (of size at-least one) with 0 sum.
 	Examples:
-	Input: {4, 2, -3, 1, 6}
-	Output: true 
-	There is a subarray with zero sum from index 1 to 3.
-	Input: {4, 2, 0, 1, 6}
-	Output: true 
-	There is a subarray with zero sum from index 2 to 2.
-	Input: {-3, 2, 3, 1, 6}
-	Output: false
+	Input: {4, 2, -3, 1, 6}	Output: true 
+	There is a subarray with zero sum from index 1 to 3. Input: {4, 2, 0, 1, 6} Output: true 
+	There is a subarray with zero sum from index 2 to 2. Input: {-3, 2, 3, 1, 6} Output: false
 	There is no subarray with zero sum.
   - The idea is to iterate through the array and for every element arr[i], calculate sum of elements form 0 to i. 
     If the current sum has been seen before, then there is a zero sum array. 
@@ -754,12 +749,8 @@ Arrays
 53. Pythagorean Triplet in an array
 	Given an array of integers, write a function that returns true if there is a triplet (a, b, c) that satisfies a2 + b2 = c2.
 	Example:
-	Input: arr[] = {3, 1, 4, 6, 5}
-	Output: True
-	There is a Pythagorean triplet (3, 4, 5).
-	Input: arr[] = {10, 4, 6, 12, 5}
-	Output: False
-	There is no Pythagorean triplet.
+	Input: arr[] = {3, 1, 4, 6, 5} Output: True There is a Pythagorean triplet (3, 4, 5).
+	Input: arr[] = {10, 4, 6, 12, 5} Output: False  There is no Pythagorean triplet.
   - Do square of every element in input array. This step takes O(n) time.
   - Sort the squared array in increasing order. This step takes O(nLogn) time.
   - To find a triplet (a, b, c) such that a = b + c, do following.
@@ -780,33 +771,495 @@ Arrays
   - Sum of first and second is the result
   - Time:O(n)
 
+55. Stock problem, if we are allowed to buy and sell only once OR
+    Maximum difference between two elements such that larger element appears after the smaller number
+    Given an array arr[] of integers, find out the difference between any two elements such that larger element appears after the smaller number in arr[].
+    If array is [2, 3, 10, 6, 4, 8, 1] then result is 8 (Diff between 10 and 2). 
+	If array is [ 7, 9, 5, 6, 3, 2 ] then returned is 2 (Diff between 7 and 9)
+  - We take the maximum difference with the minimum element found so far.
+  - Maintain two values, minElement: minimum element found so far; maxDiff: maximum difference found so far
+  - Initially set minElement to the first element and maxDiff as 0
+  - For every element i from 1 to n-1
+    - Check and update minElement, if a[i] is smaller than minElement
+	- Check and update maxDiff, if the difference between minElement and a[i] is higher than maxDiff
+  - Finally maxDiff holds the result
+  - Time: O(n)
+  
+56. Maximum profit by buying and selling a share at most twice.	In a daily share trading, a buyer buys shares in the morning and sells it on same day. 
+    If the trader is allowed to make at most 2 transactions in a day, where as second transaction can only start after first one is complete (Sell->buy->sell->buy). 
+	Given stock prices throughout day, find out maximum profit that a share trader could have made.
+	Examples:
+	Input:   price[] = {10, 22, 5, 75, 65, 80}
+	Output:  87
+	Trader earns 87 as sum of 12 and 75
+	Buy at price 10, sell at 22, buy at 5 and sell at 80
+	Input:   price[] = {2, 30, 15, 10, 8, 25, 80}
+	Output:  100
+	Trader earns 100 as sum of 28 and 72
+	Buy at price 2, sell at 30, buy at 8 and sell at 80
+	Input:   price[] = {100, 30, 15, 10, 8, 25, 80};
+	Output:  72
+	Buy at price 8 and sell at 80.
+	Input:   price[] = {90, 80, 70, 60, 50}
+	Output:  0
+	Not possible to earn.
+  - Maintain an array profit[i] of size n, which stores the maximum profit of every subarray
+  - Initially set all values in profit[i] as 0
+  - Traverse price[] from right to left and update profit[i] such that profit[i] stores maximum profit achievable from one transaction in subarray price[i..n-1]
+    - Set maxPrice as last element, price[n-1]
+	- For every element from n-2 to 0, 
+	  - update maxPrice if price[i] is higher than maxPrice
+	  - Set profit[i] as Maximum of profit[i+1] or maxPrice - price[i]
+  - Traverse price[] from left to right and update profit[i] such that profit[i] stores maximum profit 
+    such that profit[i] contains maximum achievable profit from two transactions in subarray price[0..i].
+	- Set minPrice as first element, price[0]
+	- For every element from 1 to n-1, 
+	  - update minPrice if price[i] is lesser than minPrice
+	  - Set profit[i] as Maximum of profit[i-1] or profit[i] + price[i] - minPrice
+  - Finally profit[n-1] holds the result
+  - Time:O(n) SpaceO(n)
+  
+57. Stock Buy Sell to Maximize Profit
+	The cost of a stock on each day is given in an array, find the max profit that you can make by buying and selling in those days. 
+	For example, if the given array is {100, 180, 260, 310, 40, 535, 695}, the maximum profit can earned by buying on day 0, selling on day 3. 
+	Again buy on day 4 and sell on day 6. If the given array of prices is sorted in decreasing order, then profit cannot be earned at all.
+  - Find the local minima and store it as starting index. If not exists, return.
+  - Find the local maxima. and store it as ending index. If we reach the end, set the end as ending index.
+  - Update the solution (Increment count of buy sell pairs)
+  - Repeat the above steps if end is not reached.
+  - Time:O(n)
 
+58. The Stock Span Problem
+	The stock span problem is a financial problem where we have a series of n daily price quotes for a stock and 
+	we need to calculate span of stock’s price for all n days. The span Si of the stock’s price on a given day i is defined 
+	as the maximum number of consecutive days just before the given day, for which the price of the stock on the current day 
+	is less than or equal to its price on the given day.
+	If an array of 7 days prices is given as {100, 80, 60, 70, 60, 75, 85}, then the span values for corresponding 7 days are {1, 1, 1, 2, 1, 4, 6}
+  - Idea is to maintain a stack and store the days.
+  - When we traverse from day i-1 to i, we pop the days when the price of the stock was less than or equal to price[i] and 
+    then push the value of day i back into the stack.
+  - Create a stack and push index of first element to it
+  - Maintain a array span[i] of length n; Span value of first element is always 1
+  - For every element i from 1 to n-1
+    - Pop elements from stack while stack is not empty and top of stack is smaller or equal to than price[i]
+	- If stack becomes empty, then price[i] is greater than all elements on left of it, i.e., price[0], price[1],..price[i-1].  
+	  so span[i] = number of days form the beginning which is i+1
+    - Else price[i] is greater than elements after top of stack
+	  so span[i] = number of days after top price which is i - stack.peek();
+  - Time:O(n)
+	
+59. Delete an element from array in one traversal
+  - Assumption: element to be deleted is present in the array.
+  - Start from the rightmost element and keep moving the element one position ahead
+    until we find x.
+    - While moving we need to remember the value in the index in which we will be writing
+	  the moving element.
+	- Maintain a variable called prev which will store this value. Initially set it to a[n-1]
+	- For every element i from n-2 to 0 
+	  - Set temp = a[i]
+	  - Set a[i] = prev 
+	  - Assign prev = temp;
+	- Do the above step until either start of the array is reached or the element x is found.
+	- If start is found, x is not present in the array.
+	- If element x is found at index i, then set a[i] = prev.
+  - Time:O(n)
 
+60. Replace every array element by multiplication of previous and next
+	Given an array of integers, update every element with multiplication of previous and next elements with following exceptions. 
+	a) First element is replaced by multiplication of first and second.
+	b) Last element is replaced by multiplication of last and second last.
+	Input: arr[] = {2, 3, 4, 5, 6}
+	Output: arr[] = {6, 8, 15, 24, 30} // arr[] = {2*3, 2*4, 3*5, 4*6, 5*6} 
+  - Idea is to calculate result for first and last element separately out of loop.
+  - For middle elements, keep track of previous element and find the product of prev and a[i+1]
+  - Initially set prev = a[0]
+  - Find the product for first element, a[0] = prev * a[1]
+  - For every element i from 1 to n-2
+    - Set curr = a[i]
+	- a[i] = prev * a[i+1]
+	- prev = curr
+  - After Loop ends, we need to calculate for the last element as a[n-1] = prev * a[n-1]
+  - Time: O(n)
+	
+61. Check if any two intervals overlap among a given set of intervals
+	An interval is represented as a combination of start time and end time. Given a set of intervals, check if any two intervals overlap.
+	Input:  arr[] = {{1,3}, {5,7}, {2,4}, {6,8}}
+	Output: true
+	The intervals {1,3} and {2,4} overlap
+	Input:  arr[] = {{1,3}, {7,9}, {4,6}, {10,13}}
+	Output: false
+	No pair of intervals overlap.  
+  - Sort all intervals in increasing order of start time. This step takes O(nLogn) time.
+  - In the sorted array, if start time of an interval is less than end of previous interval, then there is an overlap. This step takes O(n) time.
+  - Time: O(nLogn) + O(n) which is O(nLogn).
 
+62. Check if a given array contains duplicate elements within k distance from each other
+	Given an unsorted array that may contain duplicates. Also given a number k which is smaller than size of array. 
+	Write a function that returns true if array contains duplicates within k distance.
+	Examples:
+	Input: k = 3, arr[] = {1, 2, 3, 4, 1, 2, 3, 4}
+	Output: false
+	All duplicates are more than k distance away.
+	Input: k = 3, arr[] = {1, 2, 3, 1, 4, 5}
+	Output: true
+	1 is repeated at distance 3.
+	Input: k = 3, arr[] = {1, 2, 3, 4, 5}
+	Output: false
+	Input: k = 3, arr[] = {1, 2, 3, 4, 4}
+	Output: true
+  - Maintain a hashset.
+  - For every element i 0 to n-1 
+    - If a[i] is present in the hashtable, then we found a duplicate element within k distance
+	- Else add a[i] to hashtable. Also,remove a[i-k] element from hashset, if i is greater than or equal  to keep
+  - Time: O(n)
 
+63. Find position of an element in a sorted array of infinite numbers
+  -	Since array is sorted, the first thing clicks into mind is binary search, but the problem here is that we don’t know size of array.
+  -	Since the array is infinite, we don’t have the upper limit to apply binary search. We need to identify the upper limit first
+  -	Let low be pointing to 1st element and high pointing to 2nd element of array, Now compare key with high index element,
+    - if it is greater than high index element then copy high index in low index and double the high index.
+	- if it is smaller, then apply binary search on high and low indices found.
+  - Time: O(Log p)  Let p be the position of element to be searched. 
+    Number of steps for finding high index 'h' is O(Log p). The value of 'h' must be less than 2*p. 
+	The number of elements between h/2 and h must be p. Therefore, time complexity of Binary Search step is also O(Log p) 
+	and overall time complexity is 2*O(Log p) which is O(Log p).
 
+64. Find the smallest positive integer value that cannot be represented as sum of any subset of a given array
+	Given a sorted array (sorted in non-decreasing order) of positive numbers, find the smallest positive integer value that 
+	cannot be represented as sum of elements of any subset of given set. 
+	Expected time complexity is O(n).
+	Examples:
+	Input:  arr[] = {1, 3, 6, 10, 11, 15};
+	Output: 2
+	Input:  arr[] = {1, 1, 1, 1};
+	Output: 5
+	Input:  arr[] = {1, 1, 3, 4};
+	Output: 10
+	Input:  arr[] = {1, 2, 5, 10, 20, 40};
+	Output: 4
+	Input:  arr[] = {1, 2, 3, 4, 5, 6};
+	Output: 22
+  - Initialise result 'res'  as 1, the smallest possible integer.
+  - For every element i from 0 to n-1, 
+    - We decide that 'res' is the final result: If arr[i] is greater than 'res', 
+	  then we found the gap which is 'res' because the elements after arr[i] are also going to be greater than 'res'.
+    - The value of 'res' is incremented after considering arr[i]: The value of 'res' is incremented by arr[i] 
+	  (If elements from 0 to (i-1) can represent 1 to 'res-1', then elements from 0 to i can represent from 1 to 'res + arr[i] – 1 
+	  by adding 'arr[i]' to all subsets that represent 1 to 'res'
+  - Time:O(n)
 
+65. Find the first repeating element in an array of integers
+	Given an array of integers, find the first repeating element in it. 
+	We need to find the element that occurs more than once and whose index of first occurrence is smallest.
+	Examples:
+	Input:  arr[] = {10, 5, 3, 4, 3, 5, 6}
+	Output: 5 [5 is the first element that repeats]
+	Input:  arr[] = {6, 10, 5, 4, 9, 120, 4, 6, 10}
+	Output: 6 [6 is the first element that repeats]
+  - Traverse the given array from right to left and keep adding to a hashtable
+  - Before adding check if the element has been already found. If found, capture the index as minIndex.
+  - Finally, minIndex holds the result value.
+  - Time:O(n)
 
+66. Find common elements in three sorted arrays
+	Given three arrays sorted in non-decreasing order, print all common elements in these arrays.
+	Examples:
+	ar1[] = {1, 5, 10, 20, 40, 80} ar2[] = {6, 7, 20, 80, 100} ar3[] = {3, 4, 15, 20, 30, 70, 80, 120} Output: 20, 80
+	ar1[] = {1, 5, 5} ar2[] = {3, 4, 5, 5, 10} ar3[] = {5, 5, 10, 20} Output: 5, 5
+  - Idea is similar to two arrays.
+  - Maintain three pointers i, j, k initially set to first element of arr1, arr2, arr3 respectively
+  - Iterate through three arrays while all arrays have elements while (i < n1 && j < n2 && k < n3)
+    - If elements pointed by i, j and k are same, we can simply print any of them as common element and move ahead in all three arrays.
+	- If arr1[i] is less than arr2[j], then move pointer i
+	- If arr2[j] is less than arr2[k], then move pointer j
+	- else move pointer k (We reach here when x > y and y > z, i.e., z is smallest)
+ - Time: O(n1+n2+n3) 
 
+67. Construct an array from its pair-sum array
+	Given a pair-sum array and size of the original array (n), construct the original array.
+	A pair-sum array for an array is the array that contains sum of all pairs in ordered form. For example pair-sum array for arr[] = {6, 8, 3, 4} is {14, 9, 10, 11, 12, 7}.
+	In general, pair-sum array for arr[0..n-1] is {arr[0]+arr[1], arr[0]+arr[2], ……., arr[1]+arr[2], arr[1]+arr[3], ……., arr[2]+arr[3], arr[2]+arr[4], …., arr[n-2]+arr[n-1}.
+	“Given a pair-sum array, construct the original array.”
+  - Let the given array be "pair[]" and let there be n elements in original array. 
+  - If we take a look at few examples, we can observe that arr[0] is half of pair[0] + pair[1] – pair[n-1]. 
+  - Note that the value of pair[0] + pair[1] – pair[n-1] is (arr[0] + arr[1]) + (arr[0] + arr[2]) – (arr[1] + arr[2]).
+  - Once we have evaluated arr[0], we can evaluate other elements by subtracting arr[0]. 
+  - For example arr[1] can be evaluated by subtracting arr[0] from pair[0], arr[2] can be evaluated by subtracting arr[0] from pair[1].
+  - Time:O(n)
 
+68. Count 1’s in a sorted binary array
+	Given a binary array sorted in non-increasing order, count the number of 1’s in it.Examples:
+	Input: arr[] = {1, 1, 0, 0, 0, 0, 0}
+	Output: 2
+	Input: arr[] = {1, 1, 1, 1, 1, 1, 1}
+	Output: 7
+	Input: arr[] = {0, 0, 0, 0, 0, 0, 0}
+	Output: 0
+  - Variation of binary search. Find the index of last occurrence of 1 using binary search.
+  - index + 1 is the count of 1s in the array.
+  - if the middle element is the last 1, then return mid+1
+    - middle element is 1 and middle is the right most element in the array; a[mid] == 1 and mid == right
+	- middle element is 1 and next element to middle element is 0; a[mid] == 1 and a[mid+1] == 0 
+  - if the middle is not last 1, then recur the same for the right side
+  - else recur for left side 
+  - Time:O(Log n)
 
+69. Find Index of 0 to be replaced with 1 to get longest continuous sequence of 1s in a binary array
+	Given an array of 0s and 1s, find the position of 0 to be replaced with 1 to get longest continuous sequence of 1s.
+	Input: arr[] =  {1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1} Output: Index 9
+	Assuming array index starts from 0, replacing 0 with 1 at index 9 causes the maximum continuous sequence of 1s.
+	Input: arr[] =  {1, 1, 1, 1, 0} Output: Index 4
+  - Keep track of two indexes: prev_zero - previous zero index, prev_prev_zero - previous to previous zero index
+  - Initially set max_count and max_index as 0
+  - For every element i from 0 to n-1
+    - If current element is 0, then calculate the difference between curr and prev_prev_zero and 
+	  if its maximum found so far update max_count = curr - prev_prev_zero and max_index as prev_zero.
+	- Update prev_prev_zero = prev_zero and prev_zero = curr for next iteration.
+  - For the last encountered zero check the same out the loop if (n-prev_prev_zero > max_count)
+  - Time:O(n)
 
+70. K’th Smallest/Largest Element in Unsorted Array
+	Given an array and a number k where k is smaller than size of array, we need to find the k’th smallest element in the given array. 
+	It is given that all array elements are distinct.
+	Input: arr[] = {7, 10, 4, 3, 20, 15}, k = 3 Output: 7
+	Input: arr[] = {7, 10, 4, 3, 20, 15}, k = 4	Output: 10
+  (a) O(n) solution for average case
+  - Variation of quick sort. In QuickSort, we pick a pivot element, then move the pivot element to its correct position and partition the array around it.
+  - The idea is, not to do complete quicksort, but stop at the point where pivot itself is k’th smallest element. 
+  - Also, not to recur for both left and right sides of pivot, but recur for one of them according to the position of pivot. 
+  - Partition the array by taking the last element as pivot and get position of pivot element in sorted array[same as quicksort]
+  - If the position is same as k, return a[pos]
+  - If the position is more than k, then recur for left side.
+  - else recur for right side
+  - Time: worst case time complexity of this method is O(n2), but it works in O(n) on average.
+ (b) Expected linear time 
+  - The idea is to randomly pick a pivot element. 
+  - generate index between l and r, and swap with the right most element.
+  - invoke the standard parition method which takes the rightmost element as pivot
+ (c) Worst Case Linear Time
+  - Divide arr[] into groups where size of each group is 5 except possibly the last group which may have less than 5 elements.  
+  - Sort the above created groups and find median of all groups. Find median of all medians.
+  - Partition arr[] around median and obtain its position. 
+  - If the position is same as k, return a[pos]
+  - If the position is more than k, then recur for left side.
+  - else recur for right side
+  - Time: O(n) in worst case
 
+71. Sort an array in wave form
+	Given an unsorted array of integers, sort the array into a wave like array. 
+	An array 'arr[0..n-1]' is sorted in wave form if arr[0] >= arr[1] <= arr[2] >= arr[3] <= arr[4] >= ...
+	Examples:
+	 Input:  arr[] = {10, 5, 6, 3, 2, 20, 100, 80} Output: arr[] = {10, 5, 6, 2, 20, 3, 100, 80} OR
+					 {20, 5, 10, 2, 80, 6, 100, 3} OR any other array that is in wave form
+	 Input:  arr[] = {20, 10, 8, 6, 4, 2} Output: arr[] = {20, 8, 10, 4, 6, 2} OR {10, 8, 20, 2, 6, 4} OR
+					 any other array that is in wave form
+	 Input:  arr[] = {2, 4, 6, 8, 10, 20} Output: arr[] = {4, 2, 8, 6, 20, 10} OR any other array that is in wave form
+	 Input:  arr[] = {3, 6, 5, 10, 7, 20} Output: arr[] = {6, 3, 10, 5, 20, 7} OR any other array that is in wave form
+  - The idea is based on the fact that if we make sure that all even positioned (at index 0, 2, 4, ..) 
+    elements are greater than their adjacent odd elements, we don’t need to worry about odd positioned element. 
+  - For every element i from 0 to n-1 incrementing by 2 for every iteration
+	- If current element is smaller than previous odd element, swap previous and current.
+	- If current element is smaller than next odd element, swap next and current.
+  - Time: O(n)
 
+72. Given two sorted arrays such the arrays may have some common elements. 
+	Find the sum of the maximum sum path to reach from beginning of any array to end of any of the two arrays. 
+	We can switch from one array to another array only at common elements.
+	Expected time complexity is O(m+n) where m is the number of elements in ar1[] and n is the number of elements in ar2[].
+	Examples:
+	Input:  ar1[] = {2, 3, 7, 10, 12}, ar2[] = {1, 5, 7, 8} Output: 35 (sum of 1 + 5 + 7 + 10 + 12)
+	We start from first element of arr2 which is 1, then we move to 5, then 7.  From 7, we switch to ar1 (7 is common)
+	and traverse 10 and 12.
+	Input:  ar1[] = {10, 12}, ar2 = {5, 7, 9} Output: 22 (sum of 10 and 12) Since there is no common element, we need to take all 
+	elements from the array with more sum.
+	Input:  ar1[] = {2, 3, 7, 10, 12, 15, 30, 34} ar2[] = {1, 5, 7, 8, 10, 15, 16, 19}
+	Output: 122 (sum of 1, 5, 7, 8, 10, 12, 15, 30, 34)
+  - Idea is to calculate sums of elements between all common points for both arrays. 
+  - Whenever we see a common point, we compare the two sums and add the maximum of two to the result. 
+  - Keep track of three values result, sum1 & sum2 to calculate the sum of elements in ar1[] and ar2[] respectively.
+    These sums are between two common points.
+  - Have two pointers i, j for ar1[] and ar2[], initially set to 0.
+  - Traverse elements of both arrays ie while (i < m && j < n)  
+    - If current element of ar1[] is smaller than current element of ar2[], then update sum1, 
+	  else if current element of ar2[] is smaller, then update sum2.
+	- If current element of ar1[] and ar2[] are same, then take the maximum of sum1 and sum2 and add it to the result. 
+	  Keep updating result while there are more common elements
+  - Update sum1 by adding remaining elements of ar1[]
+  - Update sum2 by adding remaining elements of ar2
+  - Add maximum of two sums of remaining elements to result.
+  - Time :  O(m+n)
 
+73. Sort an array according to the order defined by another array
+	Given two arrays A1[] and A2[], sort A1 in such a way that the relative order among the elements will be same as those are in A2. 
+	For the elements not present in A2, append them at last in sorted order.
+	Input: A1[] = {2, 1, 2, 5, 7, 1, 9, 3, 6, 8, 8} A2[] = {2, 1, 8, 3}	Output: A1[] = {2, 2, 1, 1, 8, 8, 3, 5, 6, 7, 9}
+  - Create a temporary array temp of size m and copy contents of A1[] to it.
+  - Create another array visited[] and initialize all entries in it as false. 
+    visited[] is used to mark those elements in temp[] which are copied to A1[].
+  - Sort temp[]
+  - Initialize the output index ind as 0.
+  - For every element i in A2 from 0 to n-1 
+    - Binary search A2[i] in temp[], if present then copy all occurrences to A1[ind] and increment ind. 
+	  Also mark the copied elements visited[]
+  - Copy all unvisited elements from temp[] to A1[].
+  - Time: O((m+n) Logm) [sorting temp - mLogm, binary search of A2 in A1-nLogm]
 
+74. Smallest subarray with sum greater than a given value.
+	Given an array of integers and a number x, find the smallest subarray with sum greater than the given value.
+	Examples:
+	arr[] = {1, 4, 45, 6, 0, 19} x  =  51 Output: 3	Minimum length subarray is {4, 45, 6}
+	arr[] = {1, 10, 5, 2, 7} x  = 9	Output: 1 Minimum length subarray is {10}
+	arr[] = {1, 11, 100, 1, 0, 200, 3, 2, 1, 250} x = 280 Output: 4 Minimum length subarray is {100, 1, 0, 200}
+  - Keep track of following values, 
+    - currSum-sum of current subarray, minLengthSoFar-minimum subarray length found so far
+	- start and end pointers to indicate the indices of the current subarray start and end. Initially both are set to 0.
+  - Loop while end is lesser than N(where N is the size of the array)
+    - Keep adding array elements while current subarray sum ie. currSum is smaller than x. Increment end pointer
+	- If currSum exceeds x, update minLengthSoFar if end - start is lesser than minLengthSoFar
+	- Remove the first start element. increment start
+  - Time:O(n)
+ 
+75. Count all distinct pairs with difference equal to k
+	Given an integer array and a positive integer k, count all distinct pairs with difference equal to k.
+	Examples:
+	Input: arr[] = {1, 5, 3, 4, 2}, k = 3 Output: 2	{1, 4} and {5, 2} 
+	Input: arr[] = {8, 12, 16, 4, 0, 20}, k = 4	Output: 5 {0, 4}, {4, 8}, {8, 12}, {12, 16} and {16, 20}  
+    (a) Sorting 
+  - Initialize count as 0
+  -	Sort all numbers in increasing order.
+  -	Remove duplicates from array.
+  -	For each element arr[i]
+	- Binary Search for arr[i] + k in subarray from i+1 to n-1.
+	- If arr[i] + k found, increment count. 
+  - Return count. 	
+  - Time: O(nLogn)
+	(b) Hashing
+  - Initialize count as 0.
+  -	Insert all distinct elements of arr[] in a hash map.  While inserting, ignore an element if already present in the hash map.
+  - Do following for each element arr[i].
+    - Look for arr[i] + k in the hash map, if found then increment count.
+    - Look for arr[i] - k in the hash map, if found then increment count.
+    - Remove arr[i] from hash table. 
+  - Time: O(n)
+  
+76. Move all zeroes to end of array
+	Given an array of random numbers, Push all the zero’s of a given array to the end of the array. 
+	For example, if the given arrays is {1, 9, 8, 4, 0, 0, 2, 7, 0, 6, 0}, it should be changed to {1, 9, 8, 4, 2, 7, 6, 0, 0, 0, 0}. 
+	The order of all other elements should be same. 
+  - Traverse the given array from left to right. 
+  - While traversing, maintain count of non-zero elements in array. Let the count be count. Initially set to 0 
+  - For every non-zero element arr[i], put the element at 'arr[count]' and increment count. 
+  - After complete traversal, all non-zero elements have already been shifted to front end. 'count' is set as index of first 0
+  - Now all we need to do is that run a loop which makes all elements zero from 'count' till end of the array.
+  - Time: O(n)
 
+77. Merge k sorted arrays
+	Given k sorted arrays of size n each, merge them and print the sorted output.
+	Example:
+	Input:
+	k = 3, n =  4
+	arr[][] = { {1, 3, 5, 7},
+				{2, 4, 6, 8},
+				{0, 9, 10, 11}} ;
 
+	Output: 0 1 2 3 4 5 6 7 8 9 10 11 
+  - Create an output array of size n*k.
+  - Create a min heap of size k and insert 1st element in all the arrays into a the heap
+  - Repeat following steps n*k times.
+    - Get minimum element from heap (minimum is always at root) and store it in output array.
+    - Replace heap root with next element from the array from which the element is extracted. 
+	- If the array doesn’t have any more elements, then replace root with infinite. After replacing the root, heapify the tree.
+  - Time: The loop runs n*k times. In every iteration of loop, we call heapify which takes O(Logk) time. O(nk Logk)
+ 
+78. Stable marriage problem
+	Given N men and N women, where each person has ranked all members of the opposite sex in order of preference, 
+	marry the men and women together such that there are no two people of opposite sex that would prefer each other over their assigned partners.
+	Let there be two men m1 and m2 and two women w1 and w2.
+	Let m1's list of preferences be {w1, w2}
+	Let m2's list of preferences be {w1, w2}
+	Let w1's list of preferences be {m1, m2}
+	Let w2's list of preferences be {m1, m2}
+	The matching { {m1, w2}, {w1, m2} } is not stable because m1 and w1 would prefer each other over their assigned partners. 
+	The matching {m1, w1} and {m2, w2} is stable 
+  - Initialize all men and women to free
+	while there exist a free man m who still has a woman w to propose to 
+	{
+		w = m's highest ranked such woman to whom he has not yet proposed
+		if w is free
+		   (m, w) become engaged
+		else some pair (m', w) already exists
+		   if w prefers m to m'
+			  (m, w) become engaged
+			   m' becomes free
+		   else
+			  (m', w) remain engaged    
+	}  
+  - Time: O(n^2)
+  
+79. Find the minimum element in a sorted and rotated array
+	A sorted array is rotated at some unknown point, find the minimum element in it.
+	Following solution assumes that all elements are distinct.
+	Examples
+	Input: {5, 6, 1, 2, 3, 4} Output: 1
+	Input: {1, 2, 3, 4} Output: 1
+	Input: {2, 1} Output: 1    
+  - examples {2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 1, 2} and {2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2)
+  - Same like the varation of binary search.
+  - one extra condition is that if first element, middle element and last element are same	
+    return the rcursive function as minimum of same functinon with low to mid-1 and 
+	binary function with inout slike min+1 and right
+	Time:o(Logn) worst case O(n)
 
+80. Count the number of possible triangles
+	Given an unsorted array of positive integers. Find the number of triangles that can be formed with 
+	three different array elements as three sides of triangles. For a triangle to be possible from 3 values, 
+	the sum of any two values (or sides) must be greater than the third value (or third side).
+	If the input array is {4, 6, 3, 7}, the output should be 3. {3, 4, 6}, {4, 6, 7} and {3, 6, 7}. 
+	Input array {10, 21, 22, 100, 101, 200, 300}. There can be 6 possible triangles: 
+	{10, 21, 22}, {21, 100, 101}, {22, 100, 101}, {10, 100, 101}, {100, 101, 200} and {101, 200, 300}
+  - a + b > c condition shall hold good for three sides of a triangle
+  - Sort the array in increasing order
+  - Keep three pointers i, j, k initially set to first, second and third element
+  - Fix i, j and find the rightmost k such that a[i] + a[j] > a[k].  
+    The number of triangles that can be formed with ‘arr[i]’ and ‘arr[j]’ as two sides is ‘k – j’. 
+	Add ‘k – j’ to count of triangles.
+  - Increment j to fix the second element again and repeat the above steps.
+  - Time:O(n^2)
 
-
-
-
-
-
-
-
-
-
-
-
+81. Suppose there is a circle. There are n petrol pumps on that circle. You are given two sets of data.
+	1. The amount of petrol that every petrol pump has.
+	2. Distance from that petrol pump to the next petrol pump.
+	Calculate the first point from where a truck will be able to complete the circle 
+	(The truck will stop at each petrol pump and it has infinite capacity). Expected time complexity is O(n). 
+	Assume for 1 litre petrol, the truck can go 1 unit of distance.
+	eg, let there be 4 petrol pumps with amount of petrol and distance to next petrol pump value pairs as {4, 6}, {6, 5}, {7, 3} and {4, 5}. 
+	The first point from where truck can make a circular tour is 2nd petrol pump. Output should be "start = 1" (index of 2nd petrol pump).  
+	
+82. 
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

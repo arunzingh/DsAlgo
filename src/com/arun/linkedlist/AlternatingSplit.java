@@ -2,25 +2,25 @@ package com.arun.linkedlist;
 
 public class AlternatingSplit {
 	Node[] split(Node head) {
-		Node head1 = head;
-		Node head2 = head.next;
-		Node[] result = {head1, head2};
+		Node tail1 = head;
+		Node tail2 = head.next;
+		Node[] result = {tail1, tail2};
 		Node curr = head.next.next;
-		int i = 0;
+		int count = 0;
 		while (curr != null) {
-			if (i%2 == 0){
-				head1.next = curr;
-				head1 = head1.next;
+			if (count%2 == 0){
+				tail1.next = curr;
+				tail1 = tail1.next;
 			} else {
-				head2.next = curr;
-				head2 = head2.next;
+				tail2.next = curr;
+				tail2 = tail2.next;
 			}
 			curr = curr.next;
-			i++;
+			count++;
 		}
 		
-		head1.next = null;
-		head2.next = null;
+		tail1.next = null;
+		tail2.next = null;
 		
 		return result;
 	}

@@ -3,40 +3,40 @@ package com.arun.linkedlist;
 public class MergeSortedLists {
 	
 	Node merge(Node head1, Node head2) {
-		Node result = null;
-		Node ptrCurr = null;
+		Node resultHead = null;
+		Node resultTail = null;
 		
 		if (head1.data < head2.data) {
-			result = head1;
-			ptrCurr = result;
+			resultHead = head1;
+			resultTail = resultHead;
 			head1 = head1.next;
 		} else {
-			result = head2;
-			ptrCurr = result;
+			resultHead = head2;
+			resultTail = resultHead;
 			head2 = head2.next;
 		}
 		
 		while (head1 != null && head2 != null){
 			if (head1.data < head2.data) {
-				ptrCurr.next = head1;
-				ptrCurr = head1;
+				resultTail.next = head1;
+				resultTail = head1;
 				head1 = head1.next;
 			} else {
-				ptrCurr.next = head2;
-				ptrCurr = head2;
+				resultTail.next = head2;
+				resultTail = head2;
 				head2 = head2.next;
 			}
 		}
 		
 		if (head1 == null) {
-			ptrCurr.next = head2;
+			resultTail.next = head2;
 		}
 		
 		if (head2 == null) {
-			ptrCurr.next = head1;
+			resultTail.next = head1;
 		}
 		
-		return result;
+		return resultHead;
 	}
 	
 	public static void main(String[] args) {

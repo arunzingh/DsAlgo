@@ -32,16 +32,28 @@ public class UnionFindCycleDetection {
 		id[i] = j;
 		return false;
 	}
+	
+	private void printIdArray() {
+		for (int i = 0; i < id.length; i++) {
+			System.out.print(id[i] + " ");
+		}
+	}
  
 	public static void main(String[] args) {
 		UnionFindCycleDetection cycle = new UnionFindCycleDetection(3);
  
 		System.out.println(cycle.addEdge(0, 1));
+		cycle.printIdArray();
 		System.out.println(cycle.addEdge(1, 2));
+		cycle.printIdArray();
 		System.out.println(cycle.addEdge(0, 2));
+		cycle.printIdArray();
+
  
  
  
 //		System.out.println(cycle.isCycle());
 	}
+
+
 }

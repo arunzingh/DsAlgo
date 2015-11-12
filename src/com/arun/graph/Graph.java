@@ -65,12 +65,12 @@ public class Graph {
 		return false;
 	}
 
-	public Vertex getAdjUnvisitedVertex(Vertex v) {
+	public Vertex getAdjUnvisitedVertex(Vertex vertex) {
 //		System.out.println("adj un vertex = " + v.index);
-		int index = v.index;
-		for (int j = 0; j < countVertex; j++) {
-			if (adjMatrix[index][j] == 1 && listVertex[j].visited == false)
-				return listVertex[j];
+		int u = vertex.index;
+		for (int v = 0; v < countVertex; v++) {
+			if (adjMatrix[u][v] == 1 && listVertex[v].visited == false)
+				return listVertex[v];
 		}
 		return null;
 	}

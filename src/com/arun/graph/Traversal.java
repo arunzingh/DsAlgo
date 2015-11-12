@@ -6,10 +6,18 @@ public class Traversal {
 	
 	Graph graph;
 	
-	boolean isCyclic(Graph g) {
+	/**
+	 * Method to find whether the given directed graph has cycle or not
+	 * it uses dfs traversal and detects cycle if there exists a back edge
+	 * 
+	 * 
+	 * @param g
+	 * @return
+	 */
+	boolean isCyclicDirected(Graph g) {
 		boolean[] recStack = new boolean[g.countVertex];
-		for (Vertex v : g.listVertex) {
-			if (isCyclicUtil(g, v, recStack)) {
+		for (Vertex u : g.listVertex) {
+			if (isCyclicDirectedUtil(g, u, recStack)) {
 				return true;
 			}
 		}
@@ -17,15 +25,16 @@ public class Traversal {
 		return false;
 	}
 	
-	private boolean isCyclicUtil(Graph g, Vertex u, boolean[] recStack) {
+	private boolean isCyclicDirectedUtil(Graph g, Vertex u, boolean[] recStack) {
 		
 		if (!u.visited) {
 			u.visited = true;
 			recStack[u.index] = true;
 			for (int v = 0; v < g.countVertex; v++) {
 				if (g.adjMatrix[u.index][v] == 1) {
-					if (!g.listVertex[v].visited && isCyclicUtil(g, g.listVertex[v], recStack)) {
-						return true;
+					if (!g.listVertex[v].visited) {
+						if (isCyclicDirectedUtil(g, g.listVertex[v], recStack))
+							return true;
 					} else if (recStack[v]) {
 						return true;
 					}
@@ -123,6 +132,47 @@ public class Traversal {
 	}
 	
 	
+	
+	/**
+	 * Method to detect whether the given undirected graph has cycle or not
+	 * It uses dfs traversal.
+	 * 
+	 * For every visited vertex 'v', if there is an adjacent 'u' 
+	 * such that u is already visited and u is not parent of v, 
+	 * then there is a cycle in graph.
+	 * 
+	 * 
+	 * 
+	 * @param g
+	 * @return
+	 */
+	boolean isCyclicUndirected(Graph g) {
+		
+		for (Vertex u : g.listVertex) {
+			if (!u.visited)
+				if (isCyclicUndirectedUtil(g, u, null))
+					return true;
+		}
+		
+		return false;
+	}
+	
+	
+	private boolean isCyclicUndirectedUtil(Graph g, Vertex u, Vertex parent) {
+		u.visited = true;
+		for (Vertex v : g.listVertex) {
+			if (g.adjMatrix[u.index][v.index] == 1) {
+				if (!v.visited) {
+					if (isCyclicUndirectedUtil(g, v, u))
+						return true;
+				} else if (parent != null && v.index != parent.index)
+					return true;
+			}
+			
+		}
+		return false;
+	}
+
 	public static void main(String[] args) {
 		Graph graph = new Graph(8, false);
 		
@@ -170,12 +220,27 @@ public class Traversal {
 		g3.addEdge(0, 3);
 		g3.addEdge(3, 4);
 		
-		System.out.println("isCyclic = " + t.isCyclic(g3));
+		System.out.println("isCyclic = " + t.isCyclicDirected(g3));
 		
 		Graph g4 = new Graph(3, false);
 	    g4.addEdge(0, 1);
 	    g4.addEdge(1, 2);
-		System.out.println("isCyclic = " + t.isCyclic(g4));
+		System.out.println("isCyclic = " + t.isCyclicDirected(g4));
+		
+		
+		Graph g5 = new Graph(5, false);
+		g5.addEdge(1, 0);
+		g5.addEdge(0, 2);
+		g5.addEdge(2, 1);
+		g5.addEdge(0, 3);
+		g5.addEdge(3, 4);
+		System.out.println("g5 isCyclic = " + t.isCyclicUndirected(g5));
+		
+		Graph g6 = new Graph(3, false);
+		g6.addEdge(0, 1);
+	    g6.addEdge(1, 2);
+	    System.out.println("g6 isCyclic = " + t.isCyclicUndirected(g6));
+
 
 	}
 }

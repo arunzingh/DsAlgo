@@ -76,8 +76,8 @@ public class Hamiltonian {
 		g.addEdge(1, 2);
 		g.addEdge(1, 4);
 		g.addEdge(2, 4);
-//		g.addEdge(3, 4);
-		g.printAdjMatrix();
+		g.addEdge(3, 4);
+//		g.printAdjMatrix();
 		Hamiltonian ham = new Hamiltonian();
 		ham.checkForHamiltonianCycle(g);
  

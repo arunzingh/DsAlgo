@@ -62,7 +62,7 @@ public class InOrder {
 		root.left.right = new TreeNode(5);
 		
 		root.right = new TreeNode(2);
-		root.right.left = new TreeNode(2);
+		root.right.left = new TreeNode(12);
 		
 		InOrder in = new InOrder();
 		in.traverseRecursive(root);

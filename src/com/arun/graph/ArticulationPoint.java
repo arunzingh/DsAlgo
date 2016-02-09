@@ -28,7 +28,8 @@ public class ArticulationPoint {
 		
 		int children = 0;
 		
-		depth[u.index] = low[u.index] = d;
+		depth[u.index] = d;
+		low[u.index] = d;
 		d++;
 		
 		for (Vertex v : g.listVertex) {
@@ -44,7 +45,7 @@ public class ArticulationPoint {
 					if (parent[u.index] == -1 && children > 1) 
 						ap[u.index] = true;
 					
-					if (parent[u.index] != -1 && low[v.index] >= depth[u.index])
+					if (parent[u.index] != -1 && depth[u.index] <=  low[v.index])
 						ap[u.index] = true;
 					
 				} else if (v.index != parent[u.index]) {

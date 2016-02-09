@@ -64,6 +64,8 @@ public class ArraySimple {
 				endIndex = i;
 			}
 			
+			// resetting surrSum when it goes negative because
+			// 
 			if (currSum < 0) {
 				currSum = 0;
 				tempStartIndex = i + 1;

@@ -8,7 +8,10 @@ public class BinaryTreeBasicOps {
 		if (root == null)
 			return 0;
 		
-		return getSize(root.left) + 1 + getSize(root.right);
+		int leftSize = getSize(root.left);
+		int rightSize = getSize(root.right); 
+		
+		return leftSize + rightSize + 1;
 	}
 	
 	boolean isSame(TreeNode root1, TreeNode root2) {
@@ -34,7 +37,7 @@ public class BinaryTreeBasicOps {
 				
 		int depth = Math.max(ldepth, rdepth);		
 		
-		return depth + 1;
+		return depth + 1; 
 	}
 	
 	void changeToMirrorTree(TreeNode root) {
@@ -49,12 +52,25 @@ public class BinaryTreeBasicOps {
 		root.right = temp;
 	}
 	
-	void travereInorder(TreeNode root) {
+	void changeToMirrorTree1(TreeNode root) {
+		if (root == null)
+			return;
+		
+		TreeNode temp = root.left;
+		root.left = root.right;
+		root.right = temp;
+		
+		changeToMirrorTree(root.left);
+		changeToMirrorTree(root.right);
+		
+	}
+	
+	void traverseInorder(TreeNode root) {
 		if (root == null) return;
 		
-		travereInorder(root.left);
+		traverseInorder(root.left);
 		System.out.print(root.data + " ");
-		travereInorder(root.right);
+		traverseInorder(root.right);
 	}
 	
 	void printPathsToLeaf(TreeNode root) {
@@ -65,7 +81,7 @@ public class BinaryTreeBasicOps {
 	
 	
 	
-	private void printPathsRecur(TreeNode root, int[] path, int length) {
+	private void printPathsRecur(TreeNode<Integer> root, int[] path, int length) {
 		if (root == null) return;
 		
 		path[length++] = root.data;
@@ -94,7 +110,7 @@ public class BinaryTreeBasicOps {
 		n1.right.right = new TreeNode(5);
 		
 		BinaryTreeBasicOps ops = new BinaryTreeBasicOps();
-		System.out.println(ops.getSize(root));
+		System.out.println("Size = " + ops.getSize(root));
 		
 		TreeNode root1 = new TreeNode(10);
 		root1.left = new TreeNode(8);
@@ -105,12 +121,15 @@ public class BinaryTreeBasicOps {
 		root1.right.left = new TreeNode(2);
 		
 		System.out.println("is same = " + ops.isSame(root, root));
-		
 		System.out.println("max depth = " + ops.getMaxDepth(root1));
+
+		System.out.println("Original tree");
+		ops.traverseInorder(root);
 		
-//		ops.changeToMirrorTree(root);
+		System.out.println("Mirror tree");
+		ops.changeToMirrorTree1(root);
 		
-		ops.travereInorder(root);
+		ops.traverseInorder(root);
 		System.out.println("Paths to leaf");
 		ops.printPathsToLeaf(root);
 	}

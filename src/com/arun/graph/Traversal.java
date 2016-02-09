@@ -98,18 +98,18 @@ public class Traversal {
 		}
 	}
 	
-	void dfsRecursive(Graph g, Vertex v) {
-		dfsRecursiveUtil(g, v);
+	void dfsRecursive(Graph g, Vertex u) {
+		dfsRecursiveUtil(g, u);
 	}
 	
-	void dfsRecursiveUtil(Graph g, Vertex v) {
-		v.visited = true;
-		System.out.print(v.label + " ");
+	void dfsRecursiveUtil(Graph g, Vertex u) {
+		u.visited = true;
+		System.out.print(u.label + " ");
 		
-		int index = v.index;
-		for (int j = 0; j < g.countVertex; j++) {
-			if (g.adjMatrix[index][j] == 1 && !g.listVertex[j].visited)
-				dfsRecursiveUtil(g, g.listVertex[j]);
+		int indexU = u.index;
+		for (int v = 0; v < g.countVertex; v++) {
+			if (g.adjMatrix[indexU][v] == 1 && !g.listVertex[v].visited)
+				dfsRecursiveUtil(g, g.listVertex[v]);
 		}
 	}
 	

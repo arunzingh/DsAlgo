@@ -1,0 +1,186 @@
+Arrays
+------
+1.  Largest sum contiguous array / Max Subarray Sum / Kadane's algorithm
+	Find subarray with given sum #39
+	Find subarray with sum 0 #52
+	Smallest subarray with sum greater than a given value #74
+2.  Sorted rotated array
+    - Search an element in a sorted rotated array #5 [solution 1 in notes; optimized solution in craking coding]
+    - Find minimum element in sorted rotated array #79
+    - Find if there is a pair with given sum in a sorted rotated array 
+3.  Reverse an array
+    Rotate an array
+4.  Maximum subsequence sum such that no two elements are adjacent
+5.  Leaders in an array #11
+	Next greater element #28
+	Replace every element with greatest element on right side #44
+6.  Union and intersection
+	- Sorted array
+	- Unsorted array
+7.  Binary Searh variants
+	- Find the first occurrunce of x in a sorted array #14, 31
+	- Find the last occurrunce of x in a sorted array #31
+	- Find the ceiling of given number in sorted array #20
+	- Find the smallest missing number in a sorted array #30
+	- Find peak element in bitonic array
+8.  Dutch National Flag
+9.  Find the Minimum length Unsorted Subarray, sorting which makes the complete array sorted
+10. Equilibrium index of an array
+	Product array puzzle
+11. Rotate matrix
+	- NxN
+	- MxN
+12. Given an array arr[], find the maximum j – i such that arr[j] > arr[i]
+13. Maximum Length Bitonic Subarray
+14. Implement two stacks in an array
+	Implement k stacks in an array
+15. Find a pair in an array with given sum
+	Find a triplet in an array with given sum
+	Find four elements in any array with given sum in O(n^2 logn)
+16. Find a sorted subsequence of size 3 in linear time
+17. Minimum number of jumps to reach end
+18. Longest increasing subsequence
+	Maximum sum increasing subsequence
+	Longest bitonic subsequence
+	Maximum length chain of pairs
+19. Longest increasing subsequence nLogn
+20. Maximum product subarray
+21. Stock
+	- Allowed to buy and sell only once
+	- Allowed to buy and sell twice
+	- Allowed to buy and sell multiple times
+	- Stock span problem
+22. K’th Smallest/Largest Element in Unsorted Array
+23. Sort an array in wave form
+24. Maximum Sum Path in Two Arrays
+25. Sort an array according to the order defined by another array
+26. Merge K sorted arrays
+27. Stable marriage problem
+	Circular tour that visits all petrol pumps
+28. Find the Increasing subsequence of length three with maximum product
+29. Parition problem
+	Balanced parition problem
+30. Maximum circular subarray sum
+
+Matrix
+-------
+01. Print a given matrix in spiral form
+	Rotate Matrix Elements
+02. A Boolean Matrix Question
+	Find the row with maximum number of 1s
+03. Maximum sum rectangle in a 2D matrix
+04. Print all elements in sorted order from row and column wise sorted matrix
+	Given a Boolean Matrix, find k such that all elements in k’th row are 0 and k’th column are 1.
+	
+LinkedList
+----------
+01. Swap nodes in a linked list without swapping data
+	Pairwise swap elements of a given linked list 
+	- Swap data
+	- Swap links
+02. Reverse a linked list
+	Reverse a Linked List in groups of given size
+	Reverse alternate K nodes in a Singly Linked List
+	Reverse a Doubly Linked List
+	Palindrome
+03. Detect loop in a linked list
+	Remove loop in linked list
+04. Union & Intersection of two Sorted Linked Lists
+05. Alternating split of a given Singly Linked List
+	Merge two sorted linked lists
+	Sort a linked list that is sorted alternating ascending and descending orders
+06. Merge Sort for Linked Lists
+07. Add Two numbers represented by LinkedList
+	- reverse
+	- normal
+08. Rotate a Linked List
+09. Merge a linked list into another linked list at alternate positions
+	Rearrange a given linked list in-place.
+	Given a linked list of line segments, remove middle points
+10. Clone a linked list with next and random pointer
+11. Flattening a Linked List
+	Flatten a multilevel linked list
+12. Bt to circular linked list
+
+Binary Tree
+------------
+01. Traversal
+	- Preorder
+	- Inorder
+	- Postorder
+	- Morris traversal
+	  - Preorder
+	  - Inorder
+02. Size of a tree
+	Height of a tree
+	Mirror of a tree
+	Mirror of n-ary tree 
+	Count Leaf nodes
+03. Level order traversal #11
+    Level order traversal in Spiral form #12
+	Maximum width of a binary tree #22
+04. Check a Bt for Children sum property
+	Convert a Bt to a tree holding children sum property
+	Check a Bt for Sum tree #27
+	Convert a Bt to sum tree
+05. Diameter of a Binary Tree 
+    Check if a Binary tree is height balanced or not
+06. Root to leaf path sum equal to a given number
+	Maximum sum leaf to root path in a binary tree
+07. Construct Tree from given Inorder and Preorder traversals
+	Construct Special Binary Tree from given Inorder traversal
+	Construct a special tree from given preorder traversal
+	Construct Full Binary Tree from given preorder and postorder traversals
+	Construct Complete Binary Tree from its Linked List Representation
+	Construct a tree from Inorder and Level order traversals
+08. Print nodes at k distance from root
+    Print ancestors of a given node  
+09. Connect nodes at same level #29
+	Populate inorder successor for all nodes
+10. Check whether given Bt is complete or not
+	Check wheteher given Bt is full or not
+11. Convert a bt to doubly linked list | set3
+	Convert a bt to a circular linked list
+12. Remove all nodes which dont lie in any path with sum >= k
+	Remove nodes on root to leaf paths of length < k
+13. Left view
+	Right
+	Top
+	Bottom
+	Vertical order, Vertical sum
+14. Lca
+	Distance between two given keys of a Bt
+15. Print all nodes that are distance K from leaf node
+	Print all nodes at distance K from given node
+16. Check if given Bt is height balanced like Red-Black Tree
+17. Find Maximum path sum between two leaves of a Bt
+	Find Maximum path sum in a binary tree
+	Find Maximum/Minimum in binary tree
+18.	Sum of all numbers that are formed from root to leaf paths
+19. Find the closest leaf in a Binary Tree 
+20. Find the next right node of given key
+	Find multiplication of sums of data of leaves at same levels	
+21. Symmetric Tree 
+
+Bst
+---
+01. Inorder predecessor and successor for a given key in Bst
+02. Check if a Bt is a Bst or not
+03. Lca in a Bst
+04. Find the Kth smallest element in Bst
+	Find Kth largest element in Bst
+05. Sorted Array to Balanced Bst
+    Sorted LinkedList to Balanced Bst
+	Bt to Bst
+06. Find the largest Bst subtree in a given Bt
+07. Floor and ceil from Bst
+08. Add all greater values to every node in a given Bst
+	Convert Bt to Bst such that sum of all greater keys is added to every key
+09. Remove Bst keys outside the given range
+10. Merge two Bsts 
+	Merge two balanced Bsts
+11. Construct Bst from given preorder traversal
+12. Print Bst keys in a given range
+	Count Bst subtrees that lie in given range
+	Count Bst nodes that lie in given range
+

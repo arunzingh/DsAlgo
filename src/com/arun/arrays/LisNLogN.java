@@ -1,7 +1,5 @@
 package com.arun.arrays;
 
-import java.util.Arrays;
-
 public class LisNLogN {
 	void findLisNLogN(int[] a) {
 		int[] tailIndex = new int[a.length];

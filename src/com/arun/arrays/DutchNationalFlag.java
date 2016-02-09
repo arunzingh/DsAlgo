@@ -3,19 +3,19 @@ package com.arun.arrays;
 public class DutchNationalFlag {
 	void order(int[] a) {
 		int left = 0;
-		int mid = 0;
+		int curr = 0;
 		int right = a.length - 1;
 		
-		while (mid <= right) {
-			if (a[mid] == 0) {
-				swap(a, mid, left);
+		while (curr <= right) {
+			if (a[curr] == 0) {
+				swap(a, curr, left);
 				left++;
-				mid++;
-			} else if (a[mid] == 2) {
-				swap(a, mid, right);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+				curr++;
+			} else if (a[curr] == 2) {
+				swap(a, curr, right);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 				right--;
 			} else {
-				mid++;
+				curr++;
 			}
 			
 			

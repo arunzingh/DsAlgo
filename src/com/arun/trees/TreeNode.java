@@ -1,6 +1,6 @@
 package com.arun.trees;
 
-public class TreeNode {
+public class TreeNode<T> {
 	public int data;
 	public TreeNode left;
 	public TreeNode right;

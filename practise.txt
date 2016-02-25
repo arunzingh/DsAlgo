@@ -111,6 +111,7 @@ Binary Tree
 	- Morris traversal
 	  - Preorder
 	  - Inorder
+	- Boundary traversal
 02. Size of a tree
 	Height of a tree
 	Mirror of a tree
@@ -159,7 +160,7 @@ Binary Tree
 18.	Sum of all numbers that are formed from root to leaf paths
 19. Find the closest leaf in a Binary Tree 
 20. Find the next right node of given key
-	Find multiplication of sums of data of leaves at same levels	
+    Find multiplication of sums of data of leaves at same levels	
 21. Symmetric Tree 
 
 Bst

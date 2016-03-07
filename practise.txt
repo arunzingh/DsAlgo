@@ -14,53 +14,53 @@ Arrays
 5.  Leaders in an array #11
 	Next greater element #28
 	Replace every element with greatest element on right side #44
-6.  Union and intersection
-	- Sorted array
-	- Unsorted array
-7.  Binary Searh variants
+6.  Binary Searh variants
 	- Find the first occurrunce of x in a sorted array #14, 31
 	- Find the last occurrunce of x in a sorted array #31
 	- Find the ceiling of given number in sorted array #20
 	- Find the smallest missing number in a sorted array #30
 	- Find peak element in bitonic array
-8.  Dutch National Flag
-9.  Find the Minimum length Unsorted Subarray, sorting which makes the complete array sorted
-10. Equilibrium index of an array
+7.  Dutch National Flag
+8.  Find the Minimum length Unsorted Subarray, sorting which makes the complete array sorted
+9. Equilibrium index of an array
 	Product array puzzle
-11. Rotate matrix
+10. Rotate matrix
 	- NxN
 	- MxN
-12. Given an array arr[], find the maximum j – i such that arr[j] > arr[i]
-13. Maximum Length Bitonic Subarray
-14. Implement two stacks in an array
-	Implement k stacks in an array
-15. Find a pair in an array with given sum
-	Find a triplet in an array with given sum
-	Find four elements in any array with given sum in O(n^2 logn)
-16. Find a sorted subsequence of size 3 in linear time
-17. Minimum number of jumps to reach end
-18. Longest increasing subsequence
-	Maximum sum increasing subsequence
-	Longest bitonic subsequence
-	Maximum length chain of pairs
-19. Longest increasing subsequence nLogn
-20. Maximum product subarray
-21. Stock
+11. Given an array arr[], find the maximum j – i such that arr[j] > arr[i]
+12. Maximum Length Bitonic Subarray
+13. Implement two stacks in an array
+    Implement k stacks in an array
+14. Find a pair in an array with given sum
+    Find a triplet in an array with given sum
+    Find four elements in any array with given sum in O(n^2 logn)
+15. Find a sorted subsequence of size 3 in linear time
+16. Minimum number of jumps to reach end
+17. Longest increasing subsequence
+    Longest Zig-Zag Subsequence
+    Maximum sum increasing subsequence
+    Longest bitonic subsequence
+    Maximum length chain of pairs
+18. Longest increasing subsequence nLogn
+19. Maximum product subarray
+20. Stock
 	- Allowed to buy and sell only once
 	- Allowed to buy and sell twice
 	- Allowed to buy and sell multiple times
 	- Stock span problem
-22. K’th Smallest/Largest Element in Unsorted Array
-23. Sort an array in wave form
-24. Maximum Sum Path in Two Arrays
-25. Sort an array according to the order defined by another array
-26. Merge K sorted arrays
-27. Stable marriage problem
-	Circular tour that visits all petrol pumps
-28. Find the Increasing subsequence of length three with maximum product
-29. Parition problem
-	Balanced parition problem
-30. Maximum circular subarray sum
+21. K’th Smallest/Largest Element in Unsorted Array
+22. Sort an array in wave form
+23. Maximum Sum Path in Two Arrays
+24. Sort an array according to the order defined by another array
+25. Merge K sorted arrays
+26. Stable marriage problem
+    Circular tour that visits all petrol pumps
+27. Find the increasing subsequence of length three with maximum product
+28. Parition problem
+    Balanced parition problem
+29. Maximum circular subarray sum
+30. Count inversions in an array
+31. Maximum of all subarrays of size k
 
 Matrix
 -------
@@ -160,7 +160,7 @@ Binary Tree
 18.	Sum of all numbers that are formed from root to leaf paths
 19. Find the closest leaf in a Binary Tree 
 20. Find the next right node of given key
-    Find multiplication of sums of data of leaves at same levels	
+	Find multiplication of sums of data of leaves at same levels	
 21. Symmetric Tree 
 
 Bst
@@ -185,3 +185,27 @@ Bst
 	Count Bst subtrees that lie in given range
 	Count Bst nodes that lie in given range
 
+Eopi
+-----
+
+01. Skyline
+	Inversion count 
+02. Two closest points in a 2D plane
+03. Diameter of a tree
+04. Maximum subarray in a circular array
+05. Longest increasing subsequence
+	- O(n^2)
+	- O(nlogn)
+	- Longest Zig-Zag Subsequence
+	- Longest bitonic subsequence
+06. Longest subarray with sum less than or equal to k
+07. Maximum histogram area
+08. Largest 2D submatrix containing only 1s
+	Largest square 2D submatrix containing only 1s
+
+
+
+
+youtube: iDeserve
+leetcode.com
+Tushar

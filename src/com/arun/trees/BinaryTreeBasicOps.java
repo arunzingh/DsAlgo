@@ -96,7 +96,7 @@ public class BinaryTreeBasicOps {
 
 		printPathsRecur(root.left, path, length);
 		printPathsRecur(root.right, path, length);
-	}
+	}	
 
 	public static void main(String[] args) {
 		TreeNode root = new TreeNode(1);
@@ -126,11 +126,11 @@ public class BinaryTreeBasicOps {
 		System.out.println("Original tree");
 		ops.traverseInorder(root);
 		
-		System.out.println("Mirror tree");
+		System.out.println("\nMirror tree");
 		ops.changeToMirrorTree1(root);
 		
 		ops.traverseInorder(root);
-		System.out.println("Paths to leaf");
+		System.out.println("\nPaths to leaf");
 		ops.printPathsToLeaf(root);
 	}
 }

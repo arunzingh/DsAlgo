@@ -10,7 +10,6 @@ public class BellmanFord {
 			dist[i] = Integer.MAX_VALUE;
 		}
 		
-		
 		dist[source.index] = 0;
 		
 		for (int count = 0; count < g.listVertex.length; count++) {

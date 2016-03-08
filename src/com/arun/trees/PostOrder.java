@@ -42,6 +42,32 @@ public class PostOrder {
 		}
 	}
 	
+	void doPostOrderIterative(TreeNode root) {
+		
+		Stack<TreeNode> s = new Stack<TreeNode>();
+		TreeNode curr = root;
+		while (!s.isEmpty() || curr != null) {
+			if (curr != null) {
+				if (curr.right != null) s.push(curr.right);
+				s.push(curr);
+				curr = curr.left;
+			} else {
+				curr = s.pop();
+				if (curr.right != null && 
+						!s.isEmpty() &&
+						s.peek() == curr.right) {
+					s.pop();
+					s.push(curr);
+					curr = curr.right;
+				} else {
+					System.out.print(curr.data + " ");
+					curr = null;
+				}
+			}
+		}
+		
+	}
+	
 	void traverseIterative1(TreeNode root) {
 		Stack<TreeNode> s1 = new Stack<TreeNode>();
 		Stack<TreeNode> s2 = new Stack<TreeNode>();
@@ -77,7 +103,11 @@ public class PostOrder {
 		n1.right.right = new TreeNode(5);
 		
 		PostOrder po = new PostOrder();
-//		po.traverseRecursive(root);
-		po.traverseIterative1(root);
+		po.traverseRecursive(root);
+//		po.traverseIterative1(root);
+		System.out.println("Arun");
+		po.doPostOrderIterative(root);
+		
+		BTreePrinter.printNode(root);
 	}
 }

@@ -50,9 +50,7 @@ public class Dijkstra {
 			}
 			
 		}
-		
 		printSolution(g, dist);
-		
 	}
 
 	private void printSolution(Graph g, int[] dist) {

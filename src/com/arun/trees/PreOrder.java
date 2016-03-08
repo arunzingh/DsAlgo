@@ -24,6 +24,22 @@ public class PreOrder {
 		}
 	}
 	
+	
+	void doPreorderIterative(TreeNode root) {
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		TreeNode curr = root;
+		
+		while (!stack.isEmpty() || curr != null) {
+			if (curr != null) {
+				System.out.print(curr.data + " ");
+				if (curr.right != null) stack.push(curr.right);
+				curr = curr.left;
+			} else {
+				curr = stack.pop();
+			}
+		}
+	}
+	
 	public static void main(String[] args) {
 		TreeNode root = new TreeNode(10);
 		root.left = new TreeNode(8);
@@ -40,6 +56,9 @@ public class PreOrder {
 		System.out.println("");
 		System.out.println("Iterative");
 		pre.traverseIterative(root);
+		System.out.println("Iterative-Arun");
+		pre.doPreorderIterative(root);
+		
 	}
 	
 }

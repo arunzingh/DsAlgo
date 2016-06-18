@@ -1,53 +1,29 @@
 package com.arun.trees;
 
 public class Diameter {
-
-	int getDiameter(TreeNode root) {
-		if (root == null)
-			return 0;
-
-		int lht = getHeight(root.left);
-		int rht = getHeight(root.right);
-
-		int rootd = lht + 1 + rht;
-		int ld = getDiameter(root.left);
-		int rd = getDiameter(root.right);
-		
-		System.out.println("root=" + root.data + " lht=" + lht + " rht=" + rht
-				+ " ld=" + ld + " rd=" + rd);
-
-		return Math.max(rootd, Math.max(ld, rd));
+	
+	class Result {
+		int height = 0;
+		int diameter = 0;
 	}
-
-	int getHeight(TreeNode root) {
-		if (root == null)
-			return 0;
-
-		return 1 + Math.max(getHeight(root.left), getHeight(root.right));
+	
+	Result getDiameter(TreeNode root) {
+		
+		if (root == null) return new Result(); 
+		
+		Result resLeft = getDiameter(root.left);
+		Result resRight = getDiameter(root.right);
+		
+		Result res = new Result();
+		res.height = 1 + Math.max(resLeft.height, resRight.height);
+		
+		int diameter = resLeft.height + 1 + resRight.height;
+		res.diameter = Math.max(diameter, Math.max(resLeft.diameter, resRight.diameter));
+		
+		return res;
 	}
+	
 
-	int[] getDiameter1(TreeNode root) {
-		
-		int result[] = {0, 0}; // 0 - diameter , 1 - height
-		
-		if (root == null) return result;
-		
-		
-		int[] leftResult = getDiameter1(root.left);
-		int[] rightResult = getDiameter1(root.right);
-		
-		int height = 1 + Math.max(leftResult[1], rightResult[1]);
-		
-		int rootd = leftResult[1] + rightResult[1] + 1;
-		int ld = leftResult[0];
-		int rd = rightResult[0];
-		
-		result[0] = Math.max(rootd, Math.max(ld, rd));
-		result[1] = height;
-		
-		return result;
-		
-	}
 
 	public static void main(String[] args) {
 		TreeNode root = new TreeNode(1);
@@ -75,7 +51,9 @@ public class Diameter {
 		c2.right.right = n1;
 
 		Diameter d = new Diameter();
-		System.out.println(d.getDiameter(root));
-
+		
+		BTreePrinter.printNode(root);
+		Result res = d.getDiameter(root);
+		System.out.println(res.diameter);
 	}
 }

@@ -1,6 +1,46 @@
 package com.arun.trees;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 public class MaximumSumLeafToRootPath {
+	
+	class Result {
+		List<TreeNode> path;
+		int maxSum;
+		
+		public Result(int sum) {
+			path = new ArrayList<TreeNode>();
+			maxSum = sum;
+		}
+	}
+	
+	Result maxSumLeafToRootPath(TreeNode root, int sum) {
+		
+		if (root == null) return new Result(0);
+		
+		if (root.left == null && root.right == null) {
+			Result res = new Result(sum + root.data);
+			res.path = new ArrayList<TreeNode>();
+			res.path.add(root);
+			return res;
+		}
+		
+		Result ldata = maxSumLeafToRootPath(root.left, sum + root.data);
+		Result rdata = maxSumLeafToRootPath(root.right, sum + root.data);
+		
+		Result res;
+		if (ldata.maxSum > rdata.maxSum) {
+			res = new Result(ldata.maxSum);
+			res.path = ldata.path;
+		} else {
+			res = new Result(rdata.maxSum);
+			res.path = rdata.path;
+		}
+		res.path.add(root);
+		return res;
+	}
 	
 	
 	void printMaxSumAndPath(TreeNode node) {
@@ -83,6 +123,17 @@ public class MaximumSumLeafToRootPath {
 		
 //		System.out.println(max.findMaxSumLeafToRoot(root));
 
-		max.printMaxSumAndPath(root);
+//		max.printMaxSumAndPath(root);
+		BTreePrinter.printNode(root);
+		List<TreeNode> path = new ArrayList<TreeNode>();
+		Result res = max.maxSumLeafToRootPath(root, 0);
+		System.out.println(res.maxSum);
+		
+		Iterator<TreeNode> it = res.path.iterator();
+		
+		while (it.hasNext()) {
+			TreeNode n = it.next();
+			System.out.print(n.data + " ");
+		}
 	}
 }

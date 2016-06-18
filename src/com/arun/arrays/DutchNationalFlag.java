@@ -17,8 +17,6 @@ public class DutchNationalFlag {
 			} else {
 				curr++;
 			}
-			
-			
 		}
 		
 	}

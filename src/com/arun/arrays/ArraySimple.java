@@ -1,9 +1,6 @@
 package com.arun.arrays;
 
 public class ArraySimple {
-	
-	
-	
 	 
 	int searchInSortedArray(int[] a, int x, int left, int right) {
 	
@@ -64,8 +61,8 @@ public class ArraySimple {
 				endIndex = i;
 			}
 			
-			// resetting surrSum when it goes negative because
-			// 
+			// resetting currSum when it goes negative because
+			// it will bring down the future positive sum value
 			if (currSum < 0) {
 				currSum = 0;
 				tempStartIndex = i + 1;

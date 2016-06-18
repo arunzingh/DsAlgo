@@ -43,8 +43,8 @@ public class SubstringSearch {
 				// aligns with the last occurrence of it in pattern. The
 				// max function is used to make sure that we get a positive
 				// shift. We may get a negative shift if the last occurrence
-				// of bad character in pattern is on the right side of the
-				// current character.
+				// of bad character is on the right side of the
+				// current character in pattern.
 				s += Math.max(1, j - badchar[arrText[s + j]]);
 			}
  
@@ -166,7 +166,50 @@ public class SubstringSearch {
 		}
 		return lps;
 	}
- 
+	
+	
+	public void onBoyerMooreSearch(String text, String pattern) {
+		
+		int n = text.length();
+		int m = pattern.length();
+		
+		int[] badChar = buildBadChar(pattern);
+		
+		int s = 0;
+		
+		while (s+m < n) {
+			System.out.println("s=" + s);
+			int j = m-1;
+			
+			while (j >= 0 && text.charAt(s+j) == pattern.charAt(j))
+				j--;
+			
+			if (j < 0) {
+				//pattern found
+				System.out.println("Pattern occurs at index " + s);
+				
+				s += s+m < n ? m - badChar[text.charAt(s+m)] : 1;   
+			} else {
+				s += Math.max(1, j - badChar[text.charAt(s+j)]);
+			}
+		}
+		
+	}
+	
+	private int[] buildBadChar(String pattern) {
+		int[] bad = new int[256];
+		
+		for (int i = 0; i < bad.length; i++) {
+			bad[i] = -1;
+		}
+		
+		for (int i = 0; i < pattern.length(); i++) {
+			bad[pattern.charAt(i)] = i;
+		}
+		
+		return bad;
+	}
+	
 	public static void main(String[] args) {
 		String pattern = "abcdabca";
 		String pattern1 = "acacabacacabacacac";
@@ -183,7 +226,9 @@ public class SubstringSearch {
  
 		// s.doRabinKarpSearch("GEEK", "GEEKS FOR GEEKS");
  
-		s.doBoyerMooreSearch("GEEK", "GEEKS FOR GEEKS");
+//		s.doBoyerMooreSearch("AABA", "AABAACAADAABAABAA");
+		
+		s.onBoyerMooreSearch("AABAACAADAABAABAA", "AABA");
  
 	}
 }

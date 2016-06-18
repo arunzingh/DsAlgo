@@ -1,4 +1,4 @@
-package com.arun.trees;
+//package com.arun.trees;
 
 
 public class BinaryTreeBasicOps {
@@ -7,6 +7,9 @@ public class BinaryTreeBasicOps {
 		
 		if (root == null)
 			return 0;
+		
+		if (root.left == null && root.right == null) 
+			return 1;
 		
 		int leftSize = getSize(root.left);
 		int rightSize = getSize(root.right); 
@@ -110,6 +113,7 @@ public class BinaryTreeBasicOps {
 		n1.right.right = new TreeNode(5);
 		
 		BinaryTreeBasicOps ops = new BinaryTreeBasicOps();
+		BTreePrinter.printNode(root);
 		System.out.println("Size = " + ops.getSize(root));
 		
 		TreeNode root1 = new TreeNode(10);

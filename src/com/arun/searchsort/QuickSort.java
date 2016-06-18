@@ -14,17 +14,17 @@ public class QuickSort {
 	private int partition(int[] a, int left, int right) {
 		
 		int pivot = a[right];
-		int i = left;
+		int index = left;
 		
-		for (int j=left; j<=right-1; j++) {
-			if (a[j] <= pivot) {
-				swap(a, i, j);
-				i++;
+		for (int i=left; i<right; i++) {
+			if (a[i] <  pivot) {
+				swap(a, index, i);
+				index++;
 			}
 		}
-		swap(a, i, right);
+		swap(a, index, right);
 		
-		return i;
+		return index;
 	}
 
 

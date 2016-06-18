@@ -86,6 +86,26 @@ public class TreeViews {
 		}
 		
 	}
+
+	void bottomView1(TreeNode root) {
+		Map<Integer, Integer> map = new TreeMap<Integer, Integer>();
+		bottomViewUtil(root, 0, map);
+		
+		Iterator<Entry<Integer, Integer>> it = map.entrySet().iterator();
+		while (it.hasNext()) {
+			Entry<Integer, Integer> entry = it.next();
+			System.out.print(entry.getValue() + " ");
+		}
+	}
+	
+	void bottomViewUtil(TreeNode root, int hd, Map<Integer, Integer> map) {
+		if (root == null) return;
+		
+		map.put(hd, root.data);
+		
+		bottomViewUtil(root.left, hd - 1, map);
+		bottomViewUtil(root.right, hd + 1, map);
+	}
 	
 	void topView(TreeNode root) {
 		Queue<TreeNode> q = new ConcurrentLinkedQueue<TreeNode>();
@@ -171,12 +191,17 @@ public class TreeViews {
 
 		c2.right.right = n1;
 		
+		BTreePrinter.printNode(root);
+		
 		TreeViews views = new TreeViews();
-//		System.out.println("TopView");
-//		views.topView(root);
+		System.out.println("TopView");
+		views.topView(root);
 		
 		System.out.println("BottomView");
 		views.bottomView(root);
+		
+		System.out.println("BottomView-new");
+		views.bottomView1(root);
 		
 		System.out.println("LeftView");
 		views.leftView(root);

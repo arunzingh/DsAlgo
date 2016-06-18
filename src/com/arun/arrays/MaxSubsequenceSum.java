@@ -22,10 +22,28 @@ public class MaxSubsequenceSum {
 		return Math.max(incl, excl);
 	}
 	
+	int find2(int[] a) {
+		int incl = a[0];
+		int excl = 0;
+		
+		for (int i = 1; i < a.length; i++) {
+			int incl_new = excl + a[i];
+			
+			excl = Math.max(incl, excl);
+			incl = incl_new;
+		}
+		
+		return Math.max(incl, excl);
+	}
+	
 	
 	public static void main(String[] args) {
 		int[] arr = {3, 2, 5, 10, 7};
 		MaxSubsequenceSum mss = new MaxSubsequenceSum();
 		System.out.println("Max Subsequence sum = " + mss.findMaxSubsequenceSum(arr));
+		System.out.println("Max Subsequence sum (new) = " + mss.find2(arr));
+
 	}
+	
+	
 }

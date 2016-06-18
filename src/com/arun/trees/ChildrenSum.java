@@ -4,20 +4,22 @@ package com.arun.trees;
 public class ChildrenSum {
 	 
 	boolean checkChildSum(TreeNode root) {
-		if (root == null 
-				|| root.left == null && root.right == null) return true;
+		// base
+		if (root == null ) return true;
+		if (root.left == null && root.right == null) return true;
 		
 		int ldata = root.left != null ? root.left.data : 0;
 		int rdata = root.right != null ? root.right.data : 0;
-		int sumChild = ldata + rdata;
 		
-		if (root.data != sumChild) {
-			return false;
-		} else if (root.data == sumChild) {
+		int sumChild = ldata + rdata;
+
+		if (root.data == sumChild) 
 			return checkChildSum(root.left) && checkChildSum(root.right);
-		}
+		
 		return false; 
 	}
+	
+	
 	
 	void convert(TreeNode root) {
 		
@@ -54,6 +56,28 @@ public class ChildrenSum {
 		}
 	}
 	
+	int convertToChildrenSumTree(TreeNode root) {
+		if (root == null) return 0;
+		
+		if (root.left == null && root.right == null) 
+			return root.data;
+		
+		int ldata = convertToChildrenSumTree(root.left);
+		int rdata = convertToChildrenSumTree(root.right);
+		
+		int childsum = ldata + rdata;
+		
+		int diff = root.data - childsum;
+		
+		if (diff > 0 ) {
+			increment(root, diff);
+		} else if (diff < 0) {
+			root.data += -diff;
+		}
+		
+		return root.data;
+	}
+	
 	public static void main(String[] args) {
 		TreeNode root = new TreeNode(10);
 		TreeNode n1 = new TreeNode(8);
@@ -78,8 +102,9 @@ public class ChildrenSum {
 		c2.left = new TreeNode(1);
 		c2.right = new TreeNode(30);
 		
-		cs.convert(root1);
+//		cs.convert(root1);
 		
+		cs.convertToChildrenSumTree(root1);
 		new InOrder().traverseRecursive(root1);
 		
 	}

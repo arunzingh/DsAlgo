@@ -4,10 +4,10 @@ public class BubbleSort {
 	
 	void doBubbleSort(int[] a) {
 		int n = a.length;
-		for (int i = 0; i < n - 1; i++) {
-			for (int j = 0; j < n - 1 - i; j++) {
-				if (a[j] > a[j+1]) {
-					swap(a, j, j+1);
+		for (int count = 0; count < n - 1; count++) {
+			for (int i = 0; i < n - 1 - count; i++) {
+				if (a[i] > a[i+1]) {
+					swap(a, i, i+1);
 				}
 			}
 		}

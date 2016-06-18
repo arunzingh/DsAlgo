@@ -18,7 +18,8 @@ public class MergeSort {
 	}
 	
 	void merge(int[] a, int[] helper, int low, int mid, int high) {
-//		System.out.println("low =" + low + " high= " + high);
+		
+		System.out.println("low=" + low + " mid=" + mid + " high= " + high);
 		for (int i = low; i <= high; i++) {
 			helper[i] = a[i];
 		}

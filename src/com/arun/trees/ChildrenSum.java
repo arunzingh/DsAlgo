@@ -23,15 +23,16 @@ public class ChildrenSum {
 	
 	void convert(TreeNode root) {
 		
-		if (root == null 
-				|| (root.left == null && root.right == null))
-				return;
+		if (root == null) return;
+		
+		if (root.left == null && root.right == null) return;
 		
 		convert(root.left);
 		convert(root.right);
 		
 		int ldata = root.left != null ? root.left.data : 0;
 		int rdata = root.right != null ? root.right.data : 0;
+		
 		int sumChild = ldata + rdata;
 		int diff = sumChild - root.data;
 
@@ -105,7 +106,7 @@ public class ChildrenSum {
 //		cs.convert(root1);
 		
 		cs.convertToChildrenSumTree(root1);
-		new InOrder().traverseRecursive(root1);
+		new Inorder().traverseRecursive(root1);
 		
 	}
 }

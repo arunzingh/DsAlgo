@@ -56,38 +56,39 @@ public class TreeViews {
 	}
 	
 	
+//	void bottomView(TreeNode root) {
+//		Queue<TreeNode> q = new ConcurrentLinkedQueue<TreeNode>();
+//		Map<Integer, Integer> map = new TreeMap<Integer, Integer>();
+//		root.hd = 0;
+//		q.add(root);
+//		
+//		while (!q.isEmpty()) {
+//			TreeNode n = q.poll();
+//			map.put(n.hd, n.data);
+//			
+//			if (n.left != null) {
+//				n.left.hd = n.hd - 1;
+//				q.add(n.left);
+//			}
+//			
+//			if (n.right != null) {
+//				n.right.hd = n.hd + 1;
+//				q.add(n.right);
+//			}
+//		}
+//		
+//		Set<Entry<Integer, Integer>> keyset = map.entrySet();
+//		Iterator<Entry<Integer, Integer>> it = keyset.iterator();
+//		
+//		while (it.hasNext()) {
+//			Entry<Integer, Integer> data = it.next();
+//			System.out.print(data.getValue() + " ");
+//		}
+//		
+//	}
+	
+	// Arun
 	void bottomView(TreeNode root) {
-		Queue<TreeNode> q = new ConcurrentLinkedQueue<TreeNode>();
-		Map<Integer, Integer> map = new TreeMap<Integer, Integer>();
-		root.hd = 0;
-		q.add(root);
-		
-		while (!q.isEmpty()) {
-			TreeNode n = q.poll();
-			map.put(n.hd, n.data);
-			
-			if (n.left != null) {
-				n.left.hd = n.hd - 1;
-				q.add(n.left);
-			}
-			
-			if (n.right != null) {
-				n.right.hd = n.hd + 1;
-				q.add(n.right);
-			}
-		}
-		
-		Set<Entry<Integer, Integer>> keyset = map.entrySet();
-		Iterator<Entry<Integer, Integer>> it = keyset.iterator();
-		
-		while (it.hasNext()) {
-			Entry<Integer, Integer> data = it.next();
-			System.out.print(data.getValue() + " ");
-		}
-		
-	}
-
-	void bottomView1(TreeNode root) {
 		Map<Integer, Integer> map = new TreeMap<Integer, Integer>();
 		bottomViewUtil(root, 0, map);
 		
@@ -137,7 +138,37 @@ public class TreeViews {
 		}
 		
 	}
+	// This is incorrect
+	// top view has to be level order traversal
 	
+	void topView1(TreeNode root) {
+		if (root == null) return;
+		Map<Integer, Integer> map = new TreeMap<Integer, Integer>();
+		topViewUtil(root, map, 0);
+		
+		Iterator<Integer> iterator = map.keySet().iterator();
+		
+		while (iterator.hasNext()) {
+			int key = iterator.next();
+			System.out.print(map.get(key) + " ");
+		}
+	}
+	
+	
+	
+	private void topViewUtil(TreeNode root, Map<Integer, Integer> map, int hd) {
+		if (root == null) return;
+		
+		if (!map.containsKey(hd)) {
+			map.put(hd, root.data);
+		}
+
+		topViewUtil(root.left, map, hd-1);
+		topViewUtil(root.right, map, hd+1);
+		
+
+	}
+
 	int getLeftLeavesSum(TreeNode root) {
 		int[] sum = {0};
 		
@@ -197,11 +228,14 @@ public class TreeViews {
 		System.out.println("TopView");
 		views.topView(root);
 		
-		System.out.println("BottomView");
-		views.bottomView(root);
+		System.out.println("TopView-arun");
+		views.topView1(root);
 		
-		System.out.println("BottomView-new");
-		views.bottomView1(root);
+//		System.out.println("BottomView");
+//		views.bottomView(root);
+		
+		System.out.println("BottomView-arun");
+		views.bottomView(root);
 		
 		System.out.println("LeftView");
 		views.leftView(root);

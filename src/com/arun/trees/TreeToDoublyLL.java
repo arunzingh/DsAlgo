@@ -46,6 +46,25 @@ public class TreeToDoublyLL {
 		bstToDoublyLL(root.right, prev, head);
 	}
 	
+	public void convertToDoublyLinkedList(TreeNode root, TreeNode[] prev, TreeNode[] head) {
+
+		if (root == null)
+			return;
+		
+		convertToDoublyLinkedList(root.left, prev, head);
+
+		if (head[0] == null)
+			head[0] = root;
+		else {
+			prev[0].right = root;
+			root.left = prev[0];
+		}
+		
+		prev[0] = root;
+		convertToDoublyLinkedList(root.right, prev, head);
+
+		}
+	
 	public static void main(String[] args) {
 //		TreeNode root = new TreeNode(10);
 //		TreeNode n1 = new TreeNode(12);

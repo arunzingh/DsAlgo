@@ -5,7 +5,7 @@ public class LowestCommonAncestor {
 	TreeNode findLca(TreeNode root, TreeNode n1, TreeNode n2) {
 		if (root == null) return null;
 		
-		if (root == n1 || root == n2) {
+		if (root.data == n1.data || root.data == n2.data) {
 			return root;
 		} 
 		
@@ -45,10 +45,10 @@ public class LowestCommonAncestor {
 	TreeNode findLcaUtil(TreeNode root, TreeNode n1, TreeNode n2, boolean[] found) {
 		
 		if (root == null) return null;
-		if (root == n1) {
+		if (root.data == n1.data) {
 			found[0] = true;
 			return root;
-		} else if (root == n2) {
+		} else if (root.data == n2.data) {
 			found[1] = true;
 			return root;
 		}
@@ -66,6 +66,34 @@ public class LowestCommonAncestor {
 		return leftLca != null ? leftLca : rightLca;
 	}
 	
+	int findDistance(TreeNode root, TreeNode n1, TreeNode n2) {
+		TreeNode lca = findLca(root, n1, n2);
+		System.out.println("lca=" + lca.data);
+		int d1 = findLevel(lca, n1);
+		int d2 = findLevel(lca, n2);
+		System.out.println("d1=" + d1 + " d2=" + d2);
+		return d1+d2;
+	}
+	
+	int findLevel(TreeNode root, TreeNode n1) {
+		if (root == null) return 0;
+		
+		return findLevelUtil(root, n1, 0);
+	}
+	
+	private int findLevelUtil(TreeNode root, TreeNode n1, int level) {
+		if (root == null) return -1;
+		
+		if (root.data == n1.data) return level;
+		
+		int result = findLevelUtil(root.left, n1, level+1);
+		if (result == -1) {
+			result = findLevelUtil(root.right, n1, level+1);
+		}
+		
+		return result;
+	}
+
 	public static void main(String[] args) {
 		TreeNode root = new TreeNode(1);
 		TreeNode c1 = new TreeNode(2);
@@ -77,13 +105,15 @@ public class LowestCommonAncestor {
 		c2.left = new TreeNode(6);
 		c2.right = new TreeNode(7);
 		
+		BTreePrinter.printNode(root);
+		
 		LowestCommonAncestor lca = new LowestCommonAncestor();
 		
-		System.out.println(lca.findLca1(root, c1.left, c1.right).data);
-		System.out.println(lca.findLca1(root, c1.left, c2.left).data);
-		System.out.println(lca.findLca1(root, c2, c1.left).data);
-		System.out.println(lca.findLca1(root, c1, c1.left).data);
-		System.out.println(lca.findLca1(root, c1, new TreeNode(11)).data);
-
+//		System.out.println(lca.findLca1(root, c1.left, c1.right).data);
+//		System.out.println(lca.findLca1(root, c1.left, c2.left).data);
+//		System.out.println(lca.findLca1(root, c2, c1.left).data);
+//		System.out.println(lca.findLca1(root, c1, c1.left).data);
+//		System.out.println(lca.findLca1(root, c1, new TreeNode(11)).data);
+		System.out.println(lca.findDistance(root, new TreeNode(4), new TreeNode(7)));
 	}
 }

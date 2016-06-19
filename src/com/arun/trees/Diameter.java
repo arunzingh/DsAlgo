@@ -1,5 +1,15 @@
 package com.arun.trees;
 
+/**
+ * 
+ * Maximum of below three 
+ *  (a) Diameter of current [left subtree ht + 1 + right subtree ht]
+ *  (b) Diameter of left subtree
+ *  (c) Diameter of right subtree
+ *  
+ * @author Arun
+ *
+ */
 public class Diameter {
 	
 	class Result {

@@ -4,6 +4,7 @@ public class TreeNode<T> {
 	public int data;
 	public TreeNode left;
 	public TreeNode right;
+	public TreeNode next;
 	public int hd;
 	
 	public TreeNode(int data) {

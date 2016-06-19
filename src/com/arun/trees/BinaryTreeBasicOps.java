@@ -1,4 +1,4 @@
-//package com.arun.trees;
+package com.arun.trees;
 
 
 public class BinaryTreeBasicOps {
@@ -8,8 +8,8 @@ public class BinaryTreeBasicOps {
 		if (root == null)
 			return 0;
 		
-		if (root.left == null && root.right == null) 
-			return 1;
+//		if (root.left == null && root.right == null) 
+//			return 1;
 		
 		int leftSize = getSize(root.left);
 		int rightSize = getSize(root.right); 
@@ -100,6 +100,19 @@ public class BinaryTreeBasicOps {
 		printPathsRecur(root.left, path, length);
 		printPathsRecur(root.right, path, length);
 	}	
+	
+	public int getLeafNodesCount(TreeNode root) {
+		
+		if (root == null) return 0;
+		
+		if (root.left == null && root.right == null) return 1;
+		
+		int left = getLeafNodesCount(root.left);
+		int right = getLeafNodesCount(root.right);
+		
+		return left + right;
+		
+	}
 
 	public static void main(String[] args) {
 		TreeNode root = new TreeNode(1);
@@ -136,5 +149,7 @@ public class BinaryTreeBasicOps {
 		ops.traverseInorder(root);
 		System.out.println("\nPaths to leaf");
 		ops.printPathsToLeaf(root);
+		
+		System.out.println("Num leaf nodes=" + ops.getLeafNodesCount(root));
 	}
 }

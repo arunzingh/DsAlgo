@@ -36,7 +36,7 @@ public class RemoveNodeOnLeafPathK {
 		RemoveNodeOnLeafPathK rk = new RemoveNodeOnLeafPathK();
 		TreeNode result = rk.removeNode(root, 1, 4);
 		
-		new InOrder().traverseRecursive(result);
+		new Inorder().traverseRecursive(result);
 		
 	}
 }

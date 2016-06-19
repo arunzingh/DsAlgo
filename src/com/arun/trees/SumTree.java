@@ -22,7 +22,8 @@ public class SumTree {
 		Result resLeft = checkSumTree(root.left);
 		Result resRight = checkSumTree(root.right);
 
-		if (!resLeft.isSumTree || !resRight.isSumTree
+		if (!resLeft.isSumTree 
+				|| !resRight.isSumTree
 				|| root.data != resLeft.data + resRight.data)
 			return new Result(false, 0);
 
@@ -43,6 +44,7 @@ public class SumTree {
 		int rdata = convertToSumTree(root.right);
 		int old = root.data;
 		root.data = ldata + rdata;
+		
 		return root.data + old;
 	}
 

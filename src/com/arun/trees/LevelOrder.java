@@ -1,7 +1,10 @@
 package com.arun.trees;
 
 import java.util.Queue;
+import java.util.Stack;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.LinkedBlockingQueue;
 
 
 public class LevelOrder {
@@ -20,11 +23,49 @@ public class LevelOrder {
 		
 	}
 	
+	int maxWidth(TreeNode root) {
+		Queue<TreeNode> q = new LinkedBlockingQueue<TreeNode>();
+		
+		q.add(root);
+		
+		int maxWidth = Integer.MIN_VALUE;
+		
+		while (!q.isEmpty()) {
+			int currWidth = q.size();
+			maxWidth = Math.max(maxWidth, currWidth);
+			while (currWidth > 0) {
+				TreeNode curr = q.poll();
+				if (curr.left != null) q.add(curr.left);
+				if (curr.right != null) q.add(curr.right);
+				currWidth--;
+			}
+		}
+		
+		return maxWidth;
+	}
+	
 	void printSpiralForm(TreeNode root) {
+		Stack<TreeNode> s1 = new Stack<TreeNode>();
+		Stack<TreeNode> s2 = new Stack<TreeNode>();
 		
-		if (root == null) return;
 		
-		System.out.print(root.data + ", ");
+		s1.push(root);
+		
+		while (!s1.isEmpty() || !s2.isEmpty()) {
+			while (!s1.isEmpty()) {
+				TreeNode curr = s1.pop();
+				System.out.print(curr.data + " ");
+				if (curr.right != null) s2.push(curr.right);
+				if (curr.left != null) s2.push(curr.left);
+			}
+			
+			while (!s2.isEmpty()) {
+				TreeNode curr = s2.pop();
+				System.out.print(curr.data + " ");
+				if (curr.left != null) s1.push(curr.left);
+				if (curr.right != null) s1.push(curr.right);
+			}
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -78,5 +119,12 @@ public class LevelOrder {
 //		new LevelOrder().traverse(root);
 		
 		BTreePrinter.printNode(root);
+		
+		LevelOrder level = new LevelOrder();
+		
+//		level.printSpiralForm(root);
+		
+		System.out.println("MaxWidth=" + level.maxWidth(root));
+		
 	}
 }

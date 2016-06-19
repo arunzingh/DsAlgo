@@ -2,7 +2,7 @@ package com.arun.trees;
 
 import java.util.Stack;
 
-public class InOrder {
+public class Inorder {
 	
 	void doMorrisTraversal(TreeNode root) {
 		TreeNode curr = root;
@@ -82,7 +82,7 @@ public class InOrder {
 		root.right = new TreeNode(2);
 		root.right.left = new TreeNode(12);
 		
-		InOrder in = new InOrder();
+		Inorder in = new Inorder();
 		in.traverseRecursive(root);
 		System.out.println();
 //		in.traverseIterative(root);
